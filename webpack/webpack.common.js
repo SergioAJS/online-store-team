@@ -20,8 +20,18 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(c|sc|sa)ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
