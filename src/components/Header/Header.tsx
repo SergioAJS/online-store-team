@@ -37,7 +37,7 @@ export function Header() {
                 />
                 Bag{' '}
                 <span className={`${styles.nav__bag} bag-quantity`}>
-                  ( 0 items
+                  ( 0 items{' '}
                 </span>
                 <span className={`${styles.nav__bag} bag-totalToPay`}>
                   0 руб. )
