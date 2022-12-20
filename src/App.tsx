@@ -4,13 +4,17 @@
 // import { Modal } from './components/modal';
 // import { CreateProduct } from './components/CreateProduct'
 import { Header } from './components/Header/Header'
+import { Footer } from './components/footer/Footer'
 
 export function App() {
   return (
     <div className="site-container">
       <div className="black"></div>
       <Header />
-      <h1>Online Store</h1>
+      <main className="main">
+        <h1>Online Store</h1>
+      </main>
+      <Footer />
     </div>
   )
 }
