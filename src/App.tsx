@@ -3,6 +3,7 @@
 // import { products } from './data/products'
 // import { Modal } from './components/modal';
 // import { CreateProduct } from './components/CreateProduct'
+import { Catalogue } from './components/Catalogue/Catalogue'
 import { Header } from './components/Header/Header'
 import { Footer } from './components/footer/Footer'
 
@@ -13,6 +14,7 @@ export function App() {
       <Header />
       <main className="main container">
         <h1>Online Store</h1>
+        <Catalogue />
       </main>
       <Footer />
     </div>
