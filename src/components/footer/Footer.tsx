@@ -1,9 +1,9 @@
-import styles from './Footer.module.css'
+import styles from './Footer.module.scss'
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerContainer}>
+      <div className={`${styles.footerContainer} container`}>
         <a
           href="https://github.com/Andrey78945"
           className={styles.github}

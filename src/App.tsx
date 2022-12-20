@@ -11,7 +11,7 @@ export function App() {
     <div className="site-container">
       <div className="black"></div>
       <Header />
-      <main className="main">
+      <main className="main container">
         <h1>Online Store</h1>
       </main>
       <Footer />
