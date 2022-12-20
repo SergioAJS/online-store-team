@@ -4,17 +4,21 @@ import { IProduct, IResponse } from '../models'
 
 export function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([])
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   async function fetchProducts() {
     try {
       setError('')
+      setLoading(true)
       const response = await axios.get<IResponse>(
         'https://dummyjson.com/products?limit=15'
       )
       setProducts(response.data.products)
+      setLoading(false)
     } catch (e: unknown) {
       const error = e as AxiosError
+      setLoading(false)
       setError(error.message)
     }
   }
@@ -23,5 +27,5 @@ export function useProducts() {
     fetchProducts()
   }, [])
 
-  return { products, error }
+  return { products, error, loading }
 }
