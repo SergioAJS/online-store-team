@@ -5,7 +5,7 @@ import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider'
 
 export function Filters() {
   return (
-    <>
+    <section className={styles.section}>
       <h2 className={styles.section_header}>Filters</h2>
       <SelectCategory />
       <SelectBrand />
@@ -21,6 +21,6 @@ export function Filters() {
         max={2000}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
-    </>
+    </section>
   )
 }

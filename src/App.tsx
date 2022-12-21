@@ -14,8 +14,8 @@ export function App() {
       <div className="black"></div>
       <Header />
       <main className="main">
-        <div className="main-container container">
-          <h1>Online Store</h1>
+        <h1>Online Store</h1>
+        <div className="main__container container">
           <Filters />
           <Catalogue />
         </div>

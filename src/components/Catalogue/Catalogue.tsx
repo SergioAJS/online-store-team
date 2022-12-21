@@ -7,6 +7,7 @@ export function Catalogue() {
   const { products, loading } = useProducts()
   return (
     <section className={styles.catalogue}>
+      <h2 className={styles.section_header}>Catalog</h2>
       <div className={styles.catalogue__container}>
         {loading && <Loader />}
         {products.map((item) => (
