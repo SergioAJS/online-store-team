@@ -1,9 +1,11 @@
 import styles from './Filters.module.scss'
+import { useProducts } from '../../hooks/products'
 import { SelectCategory } from '../Select/SelectCategory'
 import { SelectBrand } from '../Select/SelectBrand'
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider'
 
 export function Filters() {
+  const { minPrice, maxPrice } = useProducts()
   return (
     <section className={styles.section}>
       <h2 className={styles.section_header}>Filters</h2>
@@ -17,8 +19,8 @@ export function Filters() {
       />
       <MultiRangeSlider
         fieldsetName="Price"
-        min={0}
-        max={2000}
+        min={minPrice}
+        max={maxPrice}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
     </section>
