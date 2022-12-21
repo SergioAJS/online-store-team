@@ -35,7 +35,7 @@ export function Header() {
                   src="/assets/images/bag.svg"
                   alt="Person"
                 />
-                Bag{' '}
+                Cart{' '}
                 <span className={`${styles.nav__bag} bag-quantity`}>
                   ( 0 items{' '}
                 </span>
