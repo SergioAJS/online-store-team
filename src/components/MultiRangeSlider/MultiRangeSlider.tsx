@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import './MultiRangeSlider.module.scss'
+import styles from './MultiRangeSlider.module.scss'
 
 const MultiRangeSlider = ({
+  fieldsetName,
   min,
   max,
   onChange,
 }: {
+  fieldsetName: string
   min: number
   max: number
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,7 +56,8 @@ const MultiRangeSlider = ({
   }, [minVal, maxVal, onChange])
 
   return (
-    <div className="container">
+    <fieldset className="dualrange_container">
+      <h3 className={styles.fieldset_title}>{fieldsetName}</h3>
       <input
         type="range"
         min={min}
@@ -87,7 +90,7 @@ const MultiRangeSlider = ({
         <div className="slider__left-value">{minVal}</div>
         <div className="slider__right-value">{maxVal}</div>
       </div>
-    </div>
+    </fieldset>
   )
 }
 

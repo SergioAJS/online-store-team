@@ -1,8 +1,6 @@
 import styles from './Filters.module.scss'
 import { SelectCategory } from '../Select/SelectCategory'
 import { SelectBrand } from '../Select/SelectBrand'
-import { RangePrice } from '../Range/RangePrice'
-import { RangeRaiting } from '../Range/RangeRating'
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider'
 
 export function Filters() {
@@ -11,14 +9,18 @@ export function Filters() {
       <h2 className={styles.section_header}>Filters</h2>
       <SelectCategory />
       <SelectBrand />
-      <RangePrice />
-      <RangeRaiting />
       <MultiRangeSlider
+        fieldsetName="Rating"
         min={0}
-        max={10}
+        max={5}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
-      {/* {RangeDual('lowerPrice', 'upperPrice')} */}
+      <MultiRangeSlider
+        fieldsetName="Price"
+        min={0}
+        max={2000}
+        onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+      />
     </>
   )
 }
