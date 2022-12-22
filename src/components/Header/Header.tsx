@@ -14,7 +14,7 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>
-        <a className={styles.header__logo} href="./index.html">
+        <a className={styles.header__logo} href="/">
           <img src="./assets/images/logo.png" alt="Online store" />
         </a>
 
