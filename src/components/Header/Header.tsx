@@ -1,7 +1,16 @@
 import React from 'react'
 import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
+
 export function Header() {
+  const cartPrice: number =
+    localStorage.cartPrice !== undefined
+      ? JSON.parse(localStorage.cartPrice)
+      : 0
+  const itemsInCart: number =
+    localStorage.itemsInCart !== undefined
+      ? JSON.parse(localStorage.itemsInCart)
+      : 0
   return (
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>
@@ -37,10 +46,10 @@ export function Header() {
                 />
                 Cart{' '}
                 <span className={`${styles.nav__bag} bag-quantity`}>
-                  ( 0 items{' '}
+                  ( {itemsInCart} items{' '}
                 </span>
                 <span className={`${styles.nav__bag} bag-totalToPay`}>
-                  0 руб. )
+                  {cartPrice} $ )
                 </span>
               </Link>
             </li>
