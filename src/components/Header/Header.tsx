@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Header.module.scss'
-
+import { Link } from 'react-router-dom'
 export function Header() {
   return (
     <header className={styles.header}>
@@ -23,13 +23,13 @@ export function Header() {
             </li>
 
             <li className={styles.nav__item}>
-              <a className={styles.nav__link} href="#">
-                Logout
-              </a>
+              <Link to="/" className={styles.nav__link}>
+                Catalog
+              </Link>
             </li>
 
             <li className={styles.nav__item}>
-              <a className={styles.nav__link} href="./bag.html">
+              <Link to="/cart" className={styles.nav__link}>
                 <img
                   className={styles.nav__icon}
                   src="/assets/images/bag.svg"
@@ -42,7 +42,7 @@ export function Header() {
                 <span className={`${styles.nav__bag} bag-totalToPay`}>
                   0 руб. )
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
