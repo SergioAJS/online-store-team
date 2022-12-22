@@ -19,6 +19,12 @@ const MultiRangeSlider = ({
   const minValRef = useRef(min)
   const maxValRef = useRef(max)
   const range = useRef(null)
+  // console.log(minVal, 'minVal')
+  // console.log(maxVal, 'maxVal')
+  // console.log(min, 'min')
+  // console.log(max, 'max')
+  // console.log(minValRef, 'minValRef')
+  // console.log(maxValRef, 'maxValRef')
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -62,7 +68,7 @@ const MultiRangeSlider = ({
         type="range"
         min={min}
         max={max}
-        value={minVal}
+        value={minVal !== 0 ? minVal : min}
         onChange={(event) => {
           const value = Math.min(Number(event.target.value), maxVal - 1)
           setMinVal(value)
@@ -75,7 +81,7 @@ const MultiRangeSlider = ({
         type="range"
         min={min}
         max={max}
-        value={maxVal}
+        value={maxVal !== 0 ? maxVal : max}
         onChange={(event) => {
           const value = Math.max(Number(event.target.value), minVal + 1)
           setMaxVal(value)
@@ -87,14 +93,15 @@ const MultiRangeSlider = ({
       <div className="slider">
         <div className="slider__track" />
         <div ref={range} className="slider__range" />
-        <div className="slider__left-value">{minVal}</div>
-        <div className="slider__right-value">{maxVal}</div>
+        <div className="slider__left-value">{minVal !== 0 ? minVal : min}</div>
+        <div className="slider__right-value">{maxVal !== 0 ? maxVal : max}</div>
       </div>
     </fieldset>
   )
 }
 
 MultiRangeSlider.propTypes = {
+  fieldsetName: PropTypes.string.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
