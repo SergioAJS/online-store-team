@@ -13,8 +13,8 @@ export function Filters() {
       <SelectBrand />
       <MultiRangeSlider
         fieldsetName="Rating"
-        min={0}
-        max={5}
+        min={3}
+        max={10}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
       <MultiRangeSlider
