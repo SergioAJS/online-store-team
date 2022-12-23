@@ -47,6 +47,7 @@ module.exports = {
     path: path.resolve(__dirname, '..', './build'),
     clean: true,
     filename: 'bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,7 +58,10 @@ module.exports = {
       filename: '[name].[contenthash].css',
     }),
     new CopyPlugin({
-      patterns: [{ from: 'public/assets', to: 'assets' }],
+      patterns: [
+        { from: 'public/assets', to: 'assets' },
+        { from: 'public/_redirects' },
+      ],
     }),
   ],
   stats: 'errors-only',
