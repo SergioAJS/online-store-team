@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { IProduct } from '../../models'
 import styles from './Product.module.scss'
 
@@ -37,7 +38,13 @@ export function Product({ product }: ProductProps) {
         />
       </div>
       <div className={styles.buttons}>
-        <button className={styles.product__button}>Details</button>
+        <Link
+          key={product.id}
+          to={`/product/${product.id}`}
+          className={styles.product__button}
+        >
+          Details
+        </Link>
         <button className={styles.product__button}>To Cart</button>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { MainPage } from '../src/pages/main'
 import { CartPage } from '../src/pages/cart'
 import { Header } from './components/Header/Header'
 import { Footer } from './components/footer/Footer'
+import { ProductPage } from './pages/ProductPage'
 
 export function App() {
   return (
@@ -16,6 +17,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
     </div>
