@@ -2,21 +2,19 @@ import React from 'react'
 import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
 
-export function Header() {
-  const cartPrice: number =
-    localStorage.cartPrice !== undefined
-      ? JSON.parse(localStorage.cartPrice)
-      : 0
-  const itemsInCart: number =
-    localStorage.itemsInCart !== undefined
-      ? JSON.parse(localStorage.itemsInCart)
-      : 0
+export function Header({
+  itemsInCart,
+  cartPrice,
+}: {
+  itemsInCart: number
+  cartPrice: number
+}) {
   return (
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>
-        <a className={styles.header__logo} href="/">
+        <Link to="/" className={styles.header__logo}>
           <img src="./assets/images/logo.png" alt="Online store" />
-        </a>
+        </Link>
 
         <nav className={`${styles.header__nav} nav`}>
           <ul className={styles.nav__list}>

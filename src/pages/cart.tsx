@@ -1,8 +1,8 @@
 import React from 'react'
 import { IProduct } from '../models'
-//import { createSearchParams } from 'react-router-dom'
+import { Product } from '../components/Product/Product'
 
-export function CartPage() {
+export function CartPage({ cart }: { cart: IProduct[] }) {
   const cartArray: IProduct[] =
     localStorage.cartArray !== undefined
       ? JSON.parse(localStorage.cartArray)
@@ -17,7 +17,9 @@ export function CartPage() {
         <div className="catalog__container container">
           <h2 className="catalog__title section-title">{sectionTitle}</h2>
 
-          {/* <Cart />) */}
+          {cart.map((item) => (
+            <Product product={item} key={item.id} />
+          ))}
         </div>
       </section>
     </main>
