@@ -13,7 +13,7 @@ export function Header({
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>
         <Link to="/" className={styles.header__logo}>
-          <img src="./assets/images/logo.png" alt="Online store" />
+          <img src="/assets/images/logo.png" alt="Online store" />
         </Link>
 
         <nav className={`${styles.header__nav} nav`}>
