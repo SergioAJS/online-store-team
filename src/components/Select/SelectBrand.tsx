@@ -3,7 +3,7 @@ import styles from './Select.module.scss'
 
 export function SelectBrand() {
   const { brands } = useProducts()
-  const uniqueBrands = Array.from(new Set(brands))
+  const uniqueBrands = Array.from(new Set(brands)).sort()
   // const brands = [
   //   'APPle',
   //   'Al Munakh',
@@ -88,8 +88,8 @@ export function SelectBrand() {
 
   //TODO: choose TS type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Brand: any = (item: string) => (
-    <option className={styles.slc__select} value={item}>
+  const Brand: any = (item: string, index: number) => (
+    <option className={styles.slc__select} value={item} key={index}>
       {item}
     </option>
   )

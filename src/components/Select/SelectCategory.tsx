@@ -3,7 +3,7 @@ import { useProducts } from '../../hooks/products'
 
 export function SelectCategory() {
   const { categories } = useProducts()
-  const uniqueCategories = Array.from(new Set(categories))
+  const uniqueCategories = Array.from(new Set(categories)).sort()
 
   // const categories: string[] = [
   //   'automotive',
@@ -30,8 +30,8 @@ export function SelectCategory() {
 
   //TODO: choose TS type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Option: any = (item: string) => (
-    <option className={styles.slc__select} value={item}>
+  const Option: any = (item: string, index: number) => (
+    <option className={styles.slc__select} value={item} key={index}>
       {item}
     </option>
   )
