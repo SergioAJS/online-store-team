@@ -1,14 +1,11 @@
 import React from 'react'
 import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
+import AppContext from '../../context'
 
-export function Header({
-  itemsInCart,
-  cartPrice,
-}: {
-  itemsInCart: number
-  cartPrice: number
-}) {
+export function Header() {
+  const { itemsInCart, cartPrice } = React.useContext(AppContext)
+  console.log(React.useContext(AppContext))
   return (
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>

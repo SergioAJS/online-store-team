@@ -2,11 +2,11 @@ import React from 'react'
 import { IProduct } from '../models'
 import { Product } from '../components/Product/Product'
 
-export function CartPage({ cart }: { cart: IProduct[] }) {
+export function CartPage() {
   const cartArray: IProduct[] =
-    localStorage.cartArray !== undefined
-      ? JSON.parse(localStorage.cartArray)
-      : []
+    localStorage.cart !== undefined ? JSON.parse(localStorage.cart) : []
+
+  console.log(cartArray, 'cartArray')
 
   let sectionTitle = 'Cart'
   if (cartArray.length === 0) sectionTitle = 'YOUR CART IS EMPTY'
@@ -17,7 +17,7 @@ export function CartPage({ cart }: { cart: IProduct[] }) {
         <div className="catalog__container container">
           <h2 className="catalog__title section-title">{sectionTitle}</h2>
 
-          {cart.map((item) => (
+          {cartArray.map((item) => (
             <Product product={item} key={item.id} />
           ))}
         </div>

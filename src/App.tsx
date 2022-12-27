@@ -27,6 +27,38 @@ export function App() {
     localStorage.cart !== undefined ? JSON.parse(localStorage.itemsInCart) : []
   )
 
+  const onAddToCart = async (obj: IProduct) => {
+    let findItem: IProduct | undefined = undefined
+    try {
+      if (cart.length > 0) {
+        findItem = cart.find(
+          (item: IProduct): boolean => Number(item.id) === Number(obj.id)
+        )
+      }
+      if (!findItem) {
+        setCart((prev) => {
+          localStorage.setItem('cart', JSON.stringify([...prev, obj]))
+          console.log(
+            [...prev, obj].map((x) => x.id),
+            'new'
+          )
+          return [...prev, obj]
+        })
+        setItemsInCart((prev) => {
+          localStorage.setItem('itemsInCart', JSON.stringify(prev + 1))
+          return prev + 1
+        })
+        setCartPrice((prev) => {
+          localStorage.setItem('cartPrice', JSON.stringify(prev + obj.price))
+          return prev + obj.price
+        })
+      }
+    } catch (error) {
+      alert('Ошибка при добавлении в корзину')
+      console.error(error)
+    }
+  }
+
   return (
     <div className="site-container">
       <div className="black"></div>
@@ -40,12 +72,13 @@ export function App() {
           setItemsInCart,
           setCartPrice,
           setCart,
+          onAddToCart,
         }}
       >
-        <Header itemsInCart={itemsInCart} cartPrice={cartPrice} />
+        <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/cart" element={<CartPage cart={cart} />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </AppContext.Provider>
