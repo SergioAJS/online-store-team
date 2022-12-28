@@ -164,6 +164,26 @@ section {
     background-color: #f7f6f2;
 }
 
+.card__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    counter-reset: item;
+}
+
+.card__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    max-width: 700px;
+}
+
+.card__item::before {
+    content: counter(item) ') ';
+    counter-increment: item;
+}
+
 .card__picture {
     display: block;
     width: 50%;
@@ -226,6 +246,12 @@ section {
     background-color: var(--color-active);
 }
 
+.card__buttons {
+    margin: 0;
+    width: 50px;
+    text-align: center;
+}
+
 .btn-gray {
     padding: 5px 10px;
     background-color: #d1cdcd;
@@ -269,6 +295,13 @@ section {
 .delete-btn-visible {
     z-index: unset;
     opacity: 1;
+}
+
+.card__quantity {
+    display: block;
+    width: 60px;
+    height: 32px;
+    background-color: white;
 }
 
 /* Order */

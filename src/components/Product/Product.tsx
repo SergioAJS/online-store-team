@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { IProduct } from '../../models'
 import styles from './Product.module.scss'
 
-interface ProductProps {
+export interface ProductProps {
   product: IProduct
 }
 

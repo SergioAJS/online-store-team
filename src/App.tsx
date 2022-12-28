@@ -24,7 +24,7 @@ export function App() {
       : 0
   )
   const [cart, setCart] = React.useState<IProduct[]>(
-    localStorage.cart !== undefined ? JSON.parse(localStorage.itemsInCart) : []
+    localStorage.cart !== undefined ? JSON.parse(localStorage.cart) : []
   )
 
   const onAddToCart = async (obj: IProduct) => {
