@@ -164,6 +164,26 @@ section {
     background-color: #f7f6f2;
 }
 
+.card__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    counter-reset: item;
+}
+
+.card__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    max-width: 700px;
+}
+
+.card__item::before {
+    content: counter(item) ')  ';
+    counter-increment: item;
+}
+
 .card__picture {
     display: block;
     width: 50%;
@@ -202,14 +222,6 @@ section {
     font-size: 18px;
 }
 
-.card__buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-    width: 100%;
-    font-size: 16px;
-}
-
 .show-btn {
     padding: 5px;
     font-style: italic;
@@ -224,6 +236,12 @@ section {
 .show-btn:active {
     border-color: #7a7a7a;
     background-color: var(--color-active);
+}
+
+.card__buttons {
+    margin: 0;
+    width: 50px;
+    text-align: center;
 }
 
 .btn-gray {
@@ -269,6 +287,15 @@ section {
 .delete-btn-visible {
     z-index: unset;
     opacity: 1;
+}
+
+.card__quantity {
+    display: block;
+    padding-top: 5px;
+    width: 60px;
+    height: 32px;
+    text-align: center;
+    background-color: white;
 }
 
 /* Order */

@@ -1,12 +1,15 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { IProduct } from '../../models'
 import styles from './Product.module.scss'
+import AppContext from '../../context'
 
-interface ProductProps {
+export interface ProductProps {
   product: IProduct
 }
 
 export function Product({ product }: ProductProps) {
+  const { onAddToCart } = React.useContext(AppContext)
   return (
     <div className={styles.product}>
       <h3 className={styles.title}>{product.title}</h3>
@@ -45,7 +48,12 @@ export function Product({ product }: ProductProps) {
         >
           Details
         </Link>
-        <button className={styles.product__button}>To Cart</button>
+        <button
+          className={styles.product__button}
+          onClick={() => onAddToCart(product)}
+        >
+          To Cart
+        </button>
       </div>
     </div>
   )

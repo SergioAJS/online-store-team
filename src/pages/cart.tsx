@@ -1,23 +1,60 @@
 import React from 'react'
-import { IProduct } from '../models'
-//import { createSearchParams } from 'react-router-dom'
+import { ProductInCart } from '../components/Product/ProductInCart'
+import AppContext from '../context'
 
 export function CartPage() {
-  const cartArray: IProduct[] =
-    localStorage.cartArray !== undefined
-      ? JSON.parse(localStorage.cartArray)
-      : []
+  const { cart, onRemoveFromCart, onAddOne, onRemoveOne } =
+    React.useContext(AppContext)
+
+  console.log(cart, 'cartArray', typeof cart)
 
   let sectionTitle = 'Cart'
-  if (cartArray.length === 0) sectionTitle = 'YOUR CART IS EMPTY'
+  let isCartNotEmpty = true
+  if (cart === undefined || cart.length === 0) {
+    isCartNotEmpty = false
+    sectionTitle = 'YOUR CART IS EMPTY'
+  }
+
   return (
     <main className="main">
       <h1 className="visually-hidden">Cart</h1>
       <section className="section">
         <div className="catalog__container container">
           <h2 className="catalog__title section-title">{sectionTitle}</h2>
-
-          {/* <Cart />) */}
+          <ol className="card__list">
+            {cart &&
+              cart.map((item) => (
+                <li className="card__item" key={item.id}>
+                  <ProductInCart product={item} key={item.id} />
+                  <button
+                    className="card__buttons btn-gray"
+                    onClick={() => onAddOne(item)}
+                  >
+                    +
+                  </button>
+                  <span className="card__quantity">{item.inCart}</span>
+                  <button
+                    className="card__buttons btn-gray"
+                    onClick={() => onRemoveOne(item)}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="btn card__button delete-btn delete-btn-visible"
+                    data-index={item.id}
+                    title="Remove from cart"
+                    onClick={() => onRemoveFromCart(item)}
+                  >
+                    X
+                  </button>
+                </li>
+              ))}
+          </ol>
+          {isCartNotEmpty && (
+            <button className="btn catalog__button confirm-btn btn-gray">
+              Confirm order
+            </button>
+          )}
         </div>
       </section>
     </main>
