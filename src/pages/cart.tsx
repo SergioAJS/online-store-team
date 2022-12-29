@@ -4,13 +4,14 @@ import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 
 export function CartPage() {
-  const { cart } = React.useContext(AppContext)
+  const { cart, onRemoveFromCart } = React.useContext(AppContext)
 
   console.log(cart, 'cartArray', typeof cart)
 
   let sectionTitle = 'Cart'
   if (cart === undefined || cart.length === 0)
     sectionTitle = 'YOUR CART IS EMPTY'
+
   return (
     <main className="main">
       <h1 className="visually-hidden">Cart</h1>
@@ -29,6 +30,7 @@ export function CartPage() {
                     className="btn card__button delete-btn delete-btn-visible"
                     data-index={item.id}
                     title="Remove from cart"
+                    onClick={() => onRemoveFromCart(item)}
                   >
                     X
                   </button>

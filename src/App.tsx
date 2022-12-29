@@ -9,7 +9,7 @@ import { Header } from './components/Header/Header'
 import { Footer } from './components/footer/Footer'
 import { ProductPage } from './pages/ProductPage'
 import AppContext from './context'
-import { IProduct } from './models'
+import { IProduct, IProductInCart } from './models'
 
 export function App() {
   const [items, setItems] = React.useState<IProduct[]>([])
@@ -23,7 +23,7 @@ export function App() {
       ? JSON.parse(localStorage.cartPrice)
       : 0
   )
-  const [cart, setCart] = React.useState<IProduct[]>(
+  const [cart, setCart] = React.useState<IProductInCart[]>(
     localStorage.cart !== undefined ? JSON.parse(localStorage.cart) : []
   )
 
@@ -37,12 +37,17 @@ export function App() {
       }
       if (!findItem) {
         setCart((prev) => {
-          localStorage.setItem('cart', JSON.stringify([...prev, obj]))
+          const newObj: IProductInCart = Object.assign(
+            {},
+            { ...obj },
+            { inCart: 1 }
+          )
+          localStorage.setItem('cart', JSON.stringify([...prev, newObj]))
           console.log(
             [...prev, obj].map((x) => x.id),
-            'new'
+            'after added new'
           )
-          return [...prev, obj]
+          return [...prev, newObj]
         })
         setItemsInCart((prev) => {
           localStorage.setItem('itemsInCart', JSON.stringify(prev + 1))
@@ -54,7 +59,49 @@ export function App() {
         })
       }
     } catch (error) {
-      alert('Ошибка при добавлении в корзину')
+      alert('Error while add to cart')
+      console.error(error)
+    }
+  }
+
+  const onRemoveFromCart = async (obj: IProductInCart) => {
+    let findIndex = -1
+    try {
+      if (cart.length > 0) {
+        findIndex = cart.findIndex(
+          (item: IProduct): boolean => Number(item.id) === Number(obj.id)
+        )
+      }
+      if (findIndex !== -1) {
+        setCart((prev) => {
+          localStorage.setItem(
+            'cart',
+            JSON.stringify([
+              ...prev.slice(0, findIndex),
+              ...prev.slice(findIndex + 1),
+            ])
+          )
+          console.log(
+            [...prev.slice(0, findIndex), ...prev.slice(findIndex + 1)].map(
+              (x) => x.id
+            ),
+            'after deleted'
+          )
+          return [...prev.slice(0, findIndex), ...prev.slice(findIndex + 1)]
+        })
+        setItemsInCart((prev) => {
+          const res: number = prev - obj.inCart
+          localStorage.setItem('itemsInCart', JSON.stringify(res))
+          return res
+        })
+        setCartPrice((prev) => {
+          const res: number = prev - obj.inCart * obj.price
+          localStorage.setItem('cartPrice', JSON.stringify(res))
+          return res
+        })
+      }
+    } catch (error) {
+      alert('Error while remove from cart')
       console.error(error)
     }
   }
@@ -73,6 +120,7 @@ export function App() {
           setCartPrice,
           setCart,
           onAddToCart,
+          onRemoveFromCart,
         }}
       >
         <Header />

@@ -17,13 +17,18 @@ export interface IProduct {
   category: string
   thumbnail: string
   images?: string[]
+  inCart?: 0
+}
+
+export interface IProductInCart extends IProduct {
+  inCart: 0
 }
 
 export interface IContext {
   items?: IProduct[]
   itemsInCart?: number
   cartPrice?: number
-  cart?: IProduct[]
+  cart?: IProductInCart[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setItems?: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,4 +39,6 @@ export interface IContext {
   setCart?: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onAddToCart?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRemoveFromCart?: any
 }
