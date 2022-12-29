@@ -1,16 +1,19 @@
 import React from 'react'
-//import { IProduct } from '../models'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 
 export function CartPage() {
-  const { cart, onRemoveFromCart } = React.useContext(AppContext)
+  const { cart, onRemoveFromCart, onAddOne, onRemoveOne } =
+    React.useContext(AppContext)
 
   console.log(cart, 'cartArray', typeof cart)
 
   let sectionTitle = 'Cart'
-  if (cart === undefined || cart.length === 0)
+  let isCartNotEmpty = true
+  if (cart === undefined || cart.length === 0) {
+    isCartNotEmpty = false
     sectionTitle = 'YOUR CART IS EMPTY'
+  }
 
   return (
     <main className="main">
@@ -23,9 +26,19 @@ export function CartPage() {
               cart.map((item) => (
                 <li className="card__item" key={item.id}>
                   <ProductInCart product={item} key={item.id} />
-                  <button className="card__buttons btn-gray">+</button>
-                  <span className="card__quantity"></span>
-                  <button className="card__buttons btn-gray">-</button>
+                  <button
+                    className="card__buttons btn-gray"
+                    onClick={() => onAddOne(item)}
+                  >
+                    +
+                  </button>
+                  <span className="card__quantity">{item.inCart}</span>
+                  <button
+                    className="card__buttons btn-gray"
+                    onClick={() => onRemoveOne(item)}
+                  >
+                    -
+                  </button>
                   <button
                     className="btn card__button delete-btn delete-btn-visible"
                     data-index={item.id}
@@ -37,6 +50,11 @@ export function CartPage() {
                 </li>
               ))}
           </ol>
+          {isCartNotEmpty && (
+            <button className="btn catalog__button confirm-btn btn-gray">
+              Confirm order
+            </button>
+          )}
         </div>
       </section>
     </main>

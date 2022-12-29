@@ -1,7 +1,4 @@
 import React from 'react'
-// import { Product } from './components/product'
-// import { products } from './data/products'
-// import { Modal } from './components/modal';
 import { Route, Routes } from 'react-router-dom'
 import { MainPage } from '../src/pages/main'
 import { CartPage } from '../src/pages/cart'
@@ -106,6 +103,47 @@ export function App() {
     }
   }
 
+  const onAddOne = (obj: IProductInCart) => {
+    const findItem = cart.find(
+      (item: IProductInCart): boolean => Number(item.id) === Number(obj.id)
+    )
+    if (findItem && findItem.stock > findItem.inCart) {
+      findItem.inCart += 1
+      localStorage.setItem('cart', JSON.stringify([...cart]))
+
+      setItemsInCart((prev) => {
+        localStorage.setItem('itemsInCart', JSON.stringify(prev + 1))
+        return prev + 1
+      })
+
+      setCartPrice((prev) => {
+        localStorage.setItem('cartPrice', JSON.stringify(prev + obj.price))
+        return prev + obj.price
+      })
+    }
+  }
+
+  const onRemoveOne = (obj: IProductInCart) => {
+    const findItem = cart.find(
+      (item: IProductInCart): boolean => Number(item.id) === Number(obj.id)
+    )
+    if (findItem && findItem.inCart > 0) {
+      findItem.inCart -= 1
+      localStorage.setItem('cart', JSON.stringify([...cart]))
+
+      setItemsInCart((prev) => {
+        localStorage.setItem('itemsInCart', JSON.stringify(prev - 1))
+        return prev - 1
+      })
+
+      setCartPrice((prev) => {
+        localStorage.setItem('cartPrice', JSON.stringify(prev - obj.price))
+        return prev - obj.price
+      })
+    }
+    if (findItem && findItem.inCart === 0) onRemoveFromCart(obj)
+  }
+
   return (
     <div className="site-container">
       <div className="black"></div>
@@ -121,6 +159,8 @@ export function App() {
           setCart,
           onAddToCart,
           onRemoveFromCart,
+          onAddOne,
+          onRemoveOne,
         }}
       >
         <Header />

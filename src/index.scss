@@ -180,7 +180,7 @@ section {
 }
 
 .card__item::before {
-    content: counter(item) ') ';
+    content: counter(item) ')  ';
     counter-increment: item;
 }
 
@@ -220,14 +220,6 @@ section {
 .card__price {
     font-family: 'Prata', Arial, sans-serif;
     font-size: 18px;
-}
-
-.card__buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-    width: 100%;
-    font-size: 16px;
 }
 
 .show-btn {
@@ -299,8 +291,10 @@ section {
 
 .card__quantity {
     display: block;
+    padding-top: 5px;
     width: 60px;
     height: 32px;
+    text-align: center;
     background-color: white;
 }
 

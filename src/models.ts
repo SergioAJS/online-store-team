@@ -41,4 +41,8 @@ export interface IContext {
   onAddToCart?: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRemoveFromCart?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onAddOne?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRemoveOne?: any
 }
