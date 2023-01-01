@@ -147,6 +147,7 @@ export function App() {
   const [brandSelect, setBrandSelect] = useState('')
   const [categorySelect, setCategorySelect] = useState('')
   const [productSearch, setProductSearch] = useState('')
+  const [sortSelect, setSortSelect] = useState('')
 
   const [search, setSearch] = useSearchParams()
 
@@ -161,18 +162,27 @@ export function App() {
       setBrandSelect(select)
     } else if (e.target.ariaLabel === 'Category') {
       setCategorySelect(select)
+    } else if (e.target.ariaLabel === 'Sort') {
+      setSortSelect(select)
     }
   }
 
   function onSearchProduct(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault()
     const searchProduct = e.target.value
-    console.log(search)
     searchProduct
       ? search.set(`${e.target.ariaLabel}`, `${searchProduct}`)
       : search.delete(`${e.target.ariaLabel}`)
     setSearch(search)
     setProductSearch(searchProduct)
+  }
+
+  function onClearFilters() {
+    setBrandSelect('')
+    setCategorySelect('')
+    setSortSelect('')
+    setProductSearch('')
+    setSearch([])
   }
 
   return (
@@ -197,6 +207,8 @@ export function App() {
           onSelect,
           productSearch,
           onSearchProduct,
+          sortSelect,
+          onClearFilters,
         }}
       >
         <Header />
