@@ -1,4 +1,4 @@
-import { Dispatch } from 'react'
+import { ChangeEvent, Dispatch } from 'react'
 
 export interface IResponse {
   products: Array<IProduct>
@@ -39,4 +39,9 @@ export interface IContext {
   onRemoveFromCart?: (arg0: IProductInCart) => Promise<void>
   onAddOne?: (arg0: IProductInCart) => void
   onRemoveOne?: (arg0: IProductInCart) => void
+  brandSelect?: string
+  categorySelect?: string
+  onSelect?: (aeg0: ChangeEvent<HTMLSelectElement>) => void
+  productSearch?: string
+  onSearchProduct?: (arg0: ChangeEvent<HTMLInputElement>) => void
 }

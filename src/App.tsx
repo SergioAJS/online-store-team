@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { ChangeEvent, useState } from 'react'
+import { Route, Routes, useSearchParams } from 'react-router-dom'
 import { MainPage } from '../src/pages/main'
 import { CartPage } from '../src/pages/cart'
 import { Header } from './components/Header/Header'
@@ -144,6 +144,37 @@ export function App() {
     if (findItem && findItem.inCart === 0) onRemoveFromCart(obj)
   }
 
+  const [brandSelect, setBrandSelect] = useState('')
+  const [categorySelect, setCategorySelect] = useState('')
+  const [productSearch, setProductSearch] = useState('')
+
+  const [search, setSearch] = useSearchParams()
+
+  function onSelect(e: ChangeEvent<HTMLSelectElement>) {
+    const select = e.target.value
+    console.log(select)
+    select
+      ? search.set(`${e.target.ariaLabel}`, `${select}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    if (e.target.ariaLabel === 'Brand') {
+      setBrandSelect(select)
+    } else if (e.target.ariaLabel === 'Category') {
+      setCategorySelect(select)
+    }
+  }
+
+  function onSearchProduct(e: ChangeEvent<HTMLInputElement>) {
+    e.preventDefault()
+    const searchProduct = e.target.value
+    console.log(search)
+    searchProduct
+      ? search.set(`${e.target.ariaLabel}`, `${searchProduct}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    setProductSearch(searchProduct)
+  }
+
   return (
     <div className="site-container">
       <div className="black"></div>
@@ -161,6 +192,11 @@ export function App() {
           onRemoveFromCart,
           onAddOne,
           onRemoveOne,
+          brandSelect,
+          categorySelect,
+          onSelect,
+          productSearch,
+          onSearchProduct,
         }}
       >
         <Header />

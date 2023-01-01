@@ -1,4 +1,9 @@
 .catalogue {
+  .catalogue__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .catalogue__container {
     display: flex;
     flex-wrap: wrap;

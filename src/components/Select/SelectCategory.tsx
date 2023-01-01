@@ -1,11 +1,13 @@
 import styles from './Select.module.scss'
 import { useProducts } from '../../hooks/products'
-import { useCategoryFilter } from '../../hooks/categoryFilter'
+import { useContext } from 'react'
+import AppContext from '../../context'
 
 export function SelectCategory() {
-  const { handleFilter, select } = useCategoryFilter('category')
   const { categories } = useProducts()
   const uniqueCategories = Array.from(new Set(categories)).sort()
+
+  const { categorySelect, onSelect } = useContext(AppContext)
 
   function Category(item: string, index: number) {
     return (
@@ -21,8 +23,8 @@ export function SelectCategory() {
       name="select"
       id="selectCategory"
       aria-label="Category"
-      value={select}
-      onChange={handleFilter}
+      value={categorySelect}
+      onChange={onSelect}
     >
       <option className="slc__item slc__point" value="">
         --Category--

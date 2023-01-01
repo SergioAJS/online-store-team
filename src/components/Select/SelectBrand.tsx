@@ -1,11 +1,13 @@
 import { useProducts } from '../../hooks/products'
 import styles from './Select.module.scss'
-import { useBrandFilter } from '../../hooks/brandFilter'
+import { useContext } from 'react'
+import AppContext from '../../context'
 
 export function SelectBrand() {
-  const { handleFilter, select } = useBrandFilter('brand')
   const { brands } = useProducts()
   const uniqueBrands = Array.from(new Set(brands)).sort()
+
+  const { brandSelect, onSelect } = useContext(AppContext)
 
   function Brand(item: string, index: number) {
     return (
@@ -21,8 +23,8 @@ export function SelectBrand() {
       name="select"
       id="selectBrand"
       aria-label="Brand"
-      value={select}
-      onChange={handleFilter}
+      value={brandSelect}
+      onChange={onSelect}
     >
       <option className="slc__item slc__point" value="">
         --Brand--
