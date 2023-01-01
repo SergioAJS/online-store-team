@@ -1,6 +1,7 @@
 import React from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
+import { Modal } from '../components/Modal/Modal'
 
 export function CartPage() {
   const { cart, onRemoveFromCart, onAddOne, onRemoveOne } =
@@ -13,6 +14,14 @@ export function CartPage() {
   if (cart === undefined || cart.length === 0) {
     isCartNotEmpty = false
     sectionTitle = 'YOUR CART IS EMPTY'
+  }
+
+  const backstage = document.querySelector('.black'),
+    modal = document.querySelector('.modal')
+
+  const onOpenModal = () => {
+    modal?.classList.add('modal__open')
+    backstage?.classList.add('black_active')
   }
 
   return (
@@ -51,12 +60,16 @@ export function CartPage() {
               ))}
           </ol>
           {isCartNotEmpty && (
-            <button className="btn catalog__button confirm-btn btn-gray">
+            <button
+              className="btn catalog__button confirm-btn btn-gray"
+              onClick={() => onOpenModal()}
+            >
               Confirm order
             </button>
           )}
         </div>
       </section>
+      <Modal />
     </main>
   )
 }
