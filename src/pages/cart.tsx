@@ -16,12 +16,15 @@ export function CartPage() {
     sectionTitle = 'YOUR CART IS EMPTY'
   }
 
-  const backstage = document.querySelector('.black'),
-    modal = document.querySelector('.modal')
-
   const onOpenModal = () => {
+    const backstage = document.querySelector('.black'),
+      modal = document.querySelector('.modal')
+    console.log(modal, 'modal')
+    console.log(backstage, 'backstage')
     modal?.classList.add('modal__open')
+    console.log(modal, 'modal inside')
     backstage?.classList.add('black_active')
+    console.log(backstage, 'backstage inside')
   }
 
   return (
