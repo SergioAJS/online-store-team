@@ -12,7 +12,13 @@ export function Modal() {
     <div className="modal">
       <div className="modal__content">
         <h3 className="card__title">Order</h3>
-        <SendForms onCloseModal={onCloseModal} />
+        <SendForms />
+        <button
+          className="btn card__button btn-gray cls-btn"
+          onClick={() => onCloseModal()}
+        >
+          Close
+        </button>
       </div>
     </div>
   )

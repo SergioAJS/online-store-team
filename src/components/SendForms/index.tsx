@@ -1,9 +1,6 @@
 import React from 'react'
-// import { ProductInCart } from '../components/Product/ProductInCart'
-// import AppContext from '../context'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function SendForms({ onCloseModal }: { onCloseModal: () => void }) {
+export function SendForms() {
   return (
     <>
       <form
@@ -119,12 +116,6 @@ export function SendForms({ onCloseModal }: { onCloseModal: () => void }) {
           Submit
         </button>
       </form>
-      <button
-        className="btn card__button btn-gray cls-btn"
-        onClick={() => onCloseModal()}
-      >
-        Close
-      </button>
     </>
   )
 }
