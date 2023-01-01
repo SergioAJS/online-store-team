@@ -17,8 +17,6 @@ export function Catalogue() {
     sortSelect,
   } = useContext(AppContext)
 
-  console.log('cat', categorySelect)
-
   const filteredProducts = products.filter(
     (product) =>
       product.category

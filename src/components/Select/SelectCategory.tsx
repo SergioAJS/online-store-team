@@ -9,8 +9,6 @@ export function SelectCategory() {
 
   const { categorySelect, onSelect } = useContext(AppContext)
 
-  console.log('catSelect', categorySelect)
-
   function Category(item: string, index: number) {
     return (
       <option className={styles.slc__select} value={item} key={index}>
