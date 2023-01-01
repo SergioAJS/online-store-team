@@ -1,4 +1,10 @@
 .slc__select {
+    background-color: rgb(245, 245, 245);
     display: block;
     margin-bottom: 20px;
+    padding: 3px 10px;
+    border-radius: 7px;
+    outline: none;
+    transition: 0.5s;
+    cursor: pointer;
 }

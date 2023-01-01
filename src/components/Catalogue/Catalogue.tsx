@@ -53,6 +53,7 @@ export function Catalogue() {
       <h2 className={styles.section_header}>Catalog</h2>
       <div className={styles.catalogue__header}>
         <select
+          className={styles.sort}
           name="select"
           id="sortProducts"
           aria-label="Sort"
@@ -69,6 +70,7 @@ export function Catalogue() {
         </select>
         <div>Found: {filteredProducts.length}</div>
         <input
+          className={styles.search}
           type="search"
           name="search"
           id="searchProduct"

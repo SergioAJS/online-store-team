@@ -12,7 +12,9 @@ export function Filters() {
   return (
     <section className={styles.section}>
       <h2 className={styles.section_header}>Filters</h2>
-      <button onClick={onClearFilters}>Clear Filters</button>
+      <button className={styles.clear__filters} onClick={onClearFilters}>
+        Clear Filters
+      </button>
       <SelectCategory />
       <SelectBrand />
       <MultiRangeSlider
