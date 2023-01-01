@@ -17,6 +17,8 @@ export function Catalogue() {
     sortSelect,
   } = useContext(AppContext)
 
+  console.log('cat', categorySelect)
+
   const filteredProducts = products.filter(
     (product) =>
       product.category
@@ -72,6 +74,7 @@ export function Catalogue() {
           id="searchProduct"
           placeholder="search product"
           aria-label="Search"
+          value={productSearch}
           onChange={onSearchProduct}
         />
       </div>

@@ -144,12 +144,17 @@ export function App() {
     if (findItem && findItem.inCart === 0) onRemoveFromCart(obj)
   }
 
-  const [brandSelect, setBrandSelect] = useState('')
-  const [categorySelect, setCategorySelect] = useState('')
-  const [productSearch, setProductSearch] = useState('')
-  const [sortSelect, setSortSelect] = useState('')
-
   const [search, setSearch] = useSearchParams()
+
+  const queryBrand = search.get('Brand') || ''
+  const queryCategory = search.get('Category') || ''
+  const queryProductSearch = search.get('Search') || ''
+  const querySort = search.get('Sort') || ''
+
+  const [brandSelect, setBrandSelect] = useState(queryBrand)
+  const [categorySelect, setCategorySelect] = useState(queryCategory)
+  const [productSearch, setProductSearch] = useState(queryProductSearch)
+  const [sortSelect, setSortSelect] = useState(querySort)
 
   function onSelect(e: ChangeEvent<HTMLSelectElement>) {
     const select = e.target.value
