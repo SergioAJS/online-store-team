@@ -44,7 +44,7 @@ export function Header() {
                   ( {itemsInCart} items{' '}
                 </span>
                 <span className={`${styles.nav__bag} bag-totalToPay`}>
-                  {cartPrice} $ )
+                  ${cartPrice} )
                 </span>
               </Link>
             </li>
