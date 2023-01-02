@@ -19,12 +19,36 @@ export function Catalogue() {
 
   const filteredProducts = products.filter(
     (product) =>
-      product.category
+      (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
-      product.brand.toLowerCase().includes((brandSelect || '').toLowerCase()) &&
-      product.title.toLowerCase().includes((productSearch || '').toLowerCase())
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.title
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.price
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.description
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase()))
   )
+
+  console.log(filteredProducts)
 
   if (sortSelect) {
     if (sortSelect === 'Price_ASC') {
@@ -80,9 +104,13 @@ export function Catalogue() {
       </div>
       <div className={styles.catalogue__container}>
         {loading && <Loader />}
-        {filteredProducts.map((item) => (
-          <Product product={item} key={item.id} />
-        ))}
+        {filteredProducts.length > 0 && !loading ? (
+          filteredProducts.map((item) => (
+            <Product product={item} key={item.id} />
+          ))
+        ) : (
+          <p className={styles.not__found}>Products not found</p>
+        )}
       </div>
     </section>
   )

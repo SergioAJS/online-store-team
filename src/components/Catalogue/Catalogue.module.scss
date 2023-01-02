@@ -29,5 +29,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+
+    .not__found {
+      color: red;
+      font-size: 20px;
+    }
   }
 }

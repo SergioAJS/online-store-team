@@ -74,6 +74,9 @@ export function ProductPage() {
                       Your Price:{' '}
                       <span className={styles.price}>${product.price}</span>
                     </li>
+                    <li className={styles.characteristic}>
+                      Description: <span>{product.description}</span>
+                    </li>
                   </ul>
                 </div>
                 <div className={styles.images}>
