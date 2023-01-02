@@ -33,7 +33,7 @@ export function SendForms() {
           name="name"
           type="text"
           required
-          pattern=".*([a-zA-Z]{3,}).*([a-zA-Z]{3,}).*"
+          pattern=".*([a-zA-Z]{3,}).\b([a-zA-Z]{3,}).*"
           onInput={checkName}
           placeholder="John Gald"
         />
@@ -48,7 +48,7 @@ export function SendForms() {
           name="address"
           type="text"
           required
-          pattern="([a-zA-Z]{5,}).*([a-zA-Z]{5,}).*([a-zA-Z]{5,}).*"
+          pattern="([a-zA-Z]{5,}).\b([a-zA-Z]{5,}).\b([a-zA-Z]{5,}).*"
           onInput={checkAddress}
           placeholder="USA Springfield Evergreen"
         />
@@ -96,7 +96,7 @@ export function SendForms() {
               className="form-control"
               id="cardNumber"
               required
-              pattern="^[2-6]{1}[0-9]{13}$"
+              pattern="^[3-5]{1}[0-9]{15}$"
               onInput={(): void => {
                 checkCardNumber()
                 const userCardNumber = document.getElementById(
@@ -171,7 +171,7 @@ export function SendForms() {
               console.log(cart)
               console.log('button send card')
               const temp: IProductInCart[] = [...cart]
-              temp.map((x) => onRemoveFromCart(x))
+              temp.map((x) => onRemoveFromCart?.(x))
             }
           }}
         >

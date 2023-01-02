@@ -160,8 +160,7 @@ export function checkCardNumber(): void {
       if (userCardNumber.validity.valueMissing) {
         cardlError.textContent = 'You need to enter your CardNumber.'
       } else if (userCardNumber.validity.patternMismatch) {
-        cardlError.textContent =
-          'Enter 14 numbers starting with 2, 3, 4, 5 or 6'
+        cardlError.textContent = 'Enter 16 numbers starting with 3, 4 or 5'
       }
       cardlError.className = 'error active'
     }
