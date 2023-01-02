@@ -1,18 +1,24 @@
 import React from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
+import { Modal } from '../components/Modal/Modal'
 
 export function CartPage() {
   const { cart, onRemoveFromCart, onAddOne, onRemoveOne } =
     React.useContext(AppContext)
-
-  console.log(cart, 'cartArray', typeof cart)
 
   let sectionTitle = 'Cart'
   let isCartNotEmpty = true
   if (cart === undefined || cart.length === 0) {
     isCartNotEmpty = false
     sectionTitle = 'YOUR CART IS EMPTY'
+  }
+
+  const onOpenModal = () => {
+    const backstage: HTMLDivElement | null = document.querySelector('.black'),
+      modal: HTMLDivElement | null = document.querySelector('.modal')
+    modal?.classList.add('modal__open')
+    backstage?.classList.add('black_active')
   }
 
   return (
@@ -51,12 +57,16 @@ export function CartPage() {
               ))}
           </ol>
           {isCartNotEmpty && (
-            <button className="btn catalog__button confirm-btn btn-gray">
+            <button
+              className="btn catalog__button confirm-btn btn-gray"
+              onClick={() => onOpenModal()}
+            >
               Confirm order
             </button>
           )}
         </div>
       </section>
+      <Modal />
     </main>
   )
 }

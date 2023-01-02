@@ -47,3 +47,10 @@ export interface IContext {
   sortSelect?: string
   onClearFilters?: () => void
 }
+
+export enum Cards {
+  Visa = '/assets/images/visa.jpg',
+  MasterCard = '/assets/images/mastercard.jpg',
+  AmericanExpress = '/assets/images/amex.jpg',
+  Other = '',
+}
