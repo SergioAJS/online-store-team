@@ -139,3 +139,32 @@ export function checkEmail(): void {
   }
   checkValidity()
 }
+
+export function checkCardNumber(): void {
+  const userCardNumber = document.getElementById(
+    'cardNumber'
+  ) as HTMLInputElement
+  const cardlError: HTMLTemplateElement | null = document.querySelector(
+    '.form__label_cardNumber > span.error'
+  )
+
+  if (userCardNumber.validity.valid) {
+    validations[4] = true
+    if (cardlError) {
+      cardlError.textContent = ''
+      cardlError.className = 'error'
+    }
+  } else {
+    validations[4] = false
+    if (cardlError) {
+      if (userCardNumber.validity.valueMissing) {
+        cardlError.textContent = 'You need to enter your CardNumber.'
+      } else if (userCardNumber.validity.patternMismatch) {
+        cardlError.textContent =
+          'Enter 14 numbers starting with 2, 3, 4, 5 or 6'
+      }
+      cardlError.className = 'error active'
+    }
+  }
+  checkValidity()
+}

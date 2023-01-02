@@ -5,13 +5,14 @@ import {
   checkAddress,
   checkPhone,
   checkEmail,
+  checkCardNumber,
 } from '../../validate'
 import AppContext from '../../context'
-import { IProductInCart } from '../../models'
+import { IProductInCart, Cards } from '../../models'
 
 export function SendForms() {
   const { cart, onRemoveFromCart } = React.useContext(AppContext)
-  console.log(cart)
+  const [card, setCard] = React.useState<Cards>(Cards.Other)
   return (
     <>
       <form
@@ -83,7 +84,10 @@ export function SendForms() {
           <legend className="form__legend">Payment</legend>
 
           <div className="form-group" id="card-number-field">
-            <label htmlFor="cardNumber">
+            <label
+              className="cardNumber form__label form__label_cardNumber"
+              htmlFor="cardNumber"
+            >
               Card Number<span className="error" aria-live="polite"></span>
             </label>
             <input
@@ -91,7 +95,22 @@ export function SendForms() {
               className="form-control"
               id="cardNumber"
               required
-              pattern="^[0-9]{14}$"
+              pattern="^[2-6]{1}[0-9]{13}$"
+              onInput={() => {
+                checkCardNumber()
+                const userCardNumber = document.getElementById(
+                  'cardNumber'
+                ) as HTMLInputElement
+                if (userCardNumber.value.startsWith('3')) {
+                  setCard(Cards.AmericanExpress)
+                } else if (userCardNumber.value.startsWith('4')) {
+                  setCard(Cards.Visa)
+                } else if (userCardNumber.value.startsWith('5')) {
+                  setCard(Cards.MasterCard)
+                } else {
+                  setCard(Cards.Other)
+                }
+              }}
             />
           </div>
           <div className="form-group" id="expiration-date">
@@ -126,9 +145,7 @@ export function SendForms() {
             />
           </div>
           <div className="form-group credit-card" id="credit_cards">
-            {/* <img src="assets/images/visa.jpg" id="visa" />
-              <img src="assets/images/mastercard.jpg" id="mastercard" />
-              <img src="assets/images/amex.jpg" id="amex" /> */}
+            <img src={card} />
           </div>
         </fieldset>
 

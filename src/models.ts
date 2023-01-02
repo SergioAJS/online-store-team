@@ -46,3 +46,10 @@ export interface IContext {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRemoveOne?: any
 }
+
+export enum Cards {
+  Visa = '/assets/images/visa.jpg',
+  MasterCard = '/assets/images/mastercard.jpg',
+  AmericanExpress = '/assets/images/amex.jpg',
+  Other = '',
+}

@@ -632,7 +632,6 @@ input:focus:invalid {
 }
 
 .creditCardForm #credit_cards {
-    width: 50%;
     margin-top: 25px;
     text-align: right;
 }
@@ -656,7 +655,8 @@ input:focus:invalid {
 }
 
 .credit-card {
-    height: 48px;
+    width: 78px;
+    height: 49px;
     background-color: #4c4e56;
 }
 
