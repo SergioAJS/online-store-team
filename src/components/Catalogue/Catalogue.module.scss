@@ -1,5 +1,4 @@
 .catalogue {
-
   .catalogue__header {
     display: flex;
     justify-content: space-between;
@@ -32,8 +31,11 @@
     gap: 20px;
 
     .not__found {
-      color: red;
-      font-size: 20px;
+      margin-top: 50px;
+      text-align: center;
+      font-family: 'Prata', Arial, sans-serif;
+      font-size: 32px;
+      font-weight: 400;
     }
   }
 }

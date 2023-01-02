@@ -48,8 +48,6 @@ export function Catalogue() {
           .includes((productSearch || '').toLowerCase()))
   )
 
-  console.log(filteredProducts)
-
   if (sortSelect) {
     if (sortSelect === 'Price_ASC') {
       filteredProducts.sort((a, b) => a.price - b.price)
