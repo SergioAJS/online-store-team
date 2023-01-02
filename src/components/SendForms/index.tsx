@@ -6,6 +6,7 @@ import {
   checkPhone,
   checkEmail,
   checkCardNumber,
+  checkExpiration,
 } from '../../validate'
 import AppContext from '../../context'
 import { IProductInCart, Cards } from '../../models'
@@ -96,7 +97,7 @@ export function SendForms() {
               id="cardNumber"
               required
               pattern="^[2-6]{1}[0-9]{13}$"
-              onInput={() => {
+              onInput={(): void => {
                 checkCardNumber()
                 const userCardNumber = document.getElementById(
                   'cardNumber'
@@ -114,7 +115,7 @@ export function SendForms() {
             />
           </div>
           <div className="form-group" id="expiration-date">
-            <label htmlFor="date">
+            <label className="form__label form__label_date" htmlFor="date">
               Expiration (mm/yy)
               <span className="error" aria-live="polite"></span>
             </label>
@@ -124,7 +125,18 @@ export function SendForms() {
               name="date"
               type="text"
               required
-              pattern="^[0-1]{1}[0-9]{1}/[2]{1}[2-9]{2}"
+              pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
+              onInput={(): void => {
+                const userExpiration = document.getElementById(
+                  'date'
+                ) as HTMLInputElement
+                let temp: string = userExpiration.value
+                if (temp.length === 2) {
+                  temp += '/'
+                  userExpiration.value = temp
+                }
+                checkExpiration()
+              }}
               placeholder="--/--"
             />
           </div>

@@ -168,3 +168,29 @@ export function checkCardNumber(): void {
   }
   checkValidity()
 }
+
+export function checkExpiration(): void {
+  const userExpiration = document.getElementById('date') as HTMLInputElement
+  const cardlError: HTMLTemplateElement | null = document.querySelector(
+    '.form__label_date > span.error'
+  )
+
+  if (userExpiration.validity.valid) {
+    validations[5] = true
+    if (cardlError) {
+      cardlError.textContent = ''
+      cardlError.className = 'error'
+    }
+  } else {
+    validations[5] = false
+    if (cardlError) {
+      if (userExpiration.validity.valueMissing) {
+        cardlError.textContent = 'You need to enter your Card Expiration.'
+      } else if (userExpiration.validity.patternMismatch) {
+        cardlError.textContent = 'Enter month and year (MM/YY)'
+      }
+      cardlError.className = 'error active'
+    }
+  }
+  checkValidity()
+}
