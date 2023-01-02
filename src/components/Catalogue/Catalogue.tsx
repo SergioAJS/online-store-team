@@ -104,12 +104,12 @@ export function Catalogue() {
       </div>
       <div className={styles.catalogue__container}>
         {loading && <Loader />}
-        {filteredProducts.length > 0 && !loading ? (
+        {filteredProducts.length === 0 ? (
+          <p className={styles.not__found}>Products not found</p>
+        ) : (
           filteredProducts.map((item) => (
             <Product product={item} key={item.id} />
           ))
-        ) : (
-          <p className={styles.not__found}>Products not found</p>
         )}
       </div>
     </section>
