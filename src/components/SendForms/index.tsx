@@ -1,4 +1,5 @@
 import React from 'react'
+import { checkCVV, checkName, checkAddress } from '../../validate'
 
 export function SendForms() {
   return (
@@ -20,11 +21,12 @@ export function SendForms() {
           name="name"
           type="text"
           required
-          pattern="^[A-Za-z]*$"
+          pattern=".*([a-zA-Z]{3,}).*([a-zA-Z]{3,}).*"
+          onInput={checkName}
           placeholder="John Gald"
         />
 
-        <label className="form__label form__label_name" htmlFor="address">
+        <label className="form__label form__label_address" htmlFor="address">
           Address
           <span className="error" aria-live="polite"></span>
         </label>
@@ -34,7 +36,8 @@ export function SendForms() {
           name="address"
           type="text"
           required
-          pattern="^[A-Za-z]*$"
+          pattern="([a-zA-Z]{5,}).*([a-zA-Z]{5,}).*([a-zA-Z]{5,}).*"
+          onInput={checkAddress}
           placeholder="USA Springfield Evergreen"
         />
 
@@ -68,7 +71,9 @@ export function SendForms() {
           <legend className="form__legend">Payment</legend>
 
           <div className="form-group" id="card-number-field">
-            <label htmlFor="cardNumber">Card Number</label>
+            <label htmlFor="cardNumber">
+              Card Number<span className="error" aria-live="polite"></span>
+            </label>
             <input
               type="text"
               className="form-control"
@@ -78,7 +83,10 @@ export function SendForms() {
             />
           </div>
           <div className="form-group" id="expiration-date">
-            <label htmlFor="date">Expiration (mm/yy)</label>
+            <label htmlFor="date">
+              Expiration (mm/yy)
+              <span className="error" aria-live="polite"></span>
+            </label>
             <input
               className="form__input form__input_phone"
               id="date"
@@ -91,14 +99,18 @@ export function SendForms() {
           </div>
 
           <div className="form-group CVV">
-            <label htmlFor="cvv">CVV</label>
+            <label className="form__label form__label_cvv" htmlFor="cvv">
+              CVV<span className="error" aria-live="polite"></span>
+            </label>
             <input
-              type="number"
-              size={3}
+              type="text"
+              minLength={3}
+              maxLength={3}
               className="form-control"
               id="cvv"
+              pattern="^[0-9]{3}$"
               required
-              checked
+              onInput={checkCVV}
             />
           </div>
           <div className="form-group credit-card" id="credit_cards">
