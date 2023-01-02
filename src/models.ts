@@ -1,3 +1,5 @@
+import { ChangeEvent, Dispatch } from 'react'
+
 export interface IResponse {
   products: Array<IProduct>
   total: number
@@ -29,20 +31,19 @@ export interface IContext {
   itemsInCart?: number
   cartPrice?: number
   cart?: IProductInCart[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setItems?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setItemsInCart?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setCartPrice?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setCart?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onAddToCart?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRemoveFromCart?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onAddOne?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRemoveOne?: any
+  setItems?: Dispatch<IProduct[]>
+  setItemsInCart?: Dispatch<number>
+  setCartPrice?: Dispatch<number>
+  setCart?: Dispatch<IProductInCart[]>
+  onAddToCart?: (arg0: IProduct) => void
+  onRemoveFromCart?: (arg0: IProductInCart) => Promise<void>
+  onAddOne?: (arg0: IProductInCart) => void
+  onRemoveOne?: (arg0: IProductInCart) => void
+  brandSelect?: string
+  categorySelect?: string
+  onSelect?: (aeg0: ChangeEvent<HTMLSelectElement>) => void
+  productSearch?: string
+  onSearchProduct?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  sortSelect?: string
+  onClearFilters?: () => void
 }

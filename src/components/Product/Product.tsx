@@ -50,7 +50,7 @@ export function Product({ product }: ProductProps) {
         </Link>
         <button
           className={styles.product__button}
-          onClick={() => onAddToCart(product)}
+          onClick={() => onAddToCart?.(product)}
         >
           To Cart
         </button>

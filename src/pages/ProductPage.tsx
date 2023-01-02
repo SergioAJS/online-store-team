@@ -28,7 +28,9 @@ export function ProductPage() {
   }, [])
 
   const AddToCart = () => {
-    onAddToCart(product)
+    if (product) {
+      onAddToCart?.(product)
+    }
   }
 
   return (

@@ -1,40 +1,21 @@
 import styles from './Select.module.scss'
 import { useProducts } from '../../hooks/products'
+import { useContext } from 'react'
+import AppContext from '../../context'
 
 export function SelectCategory() {
   const { categories } = useProducts()
   const uniqueCategories = Array.from(new Set(categories)).sort()
 
-  // const categories: string[] = [
-  //   'automotive',
-  //   'fragrances',
-  //   'furniture',
-  //   'groceries',
-  //   'home-decoration',
-  //   'laptops',
-  //   'lighting',
-  //   'mens-shirts',
-  //   'mens-shoes',
-  //   'mens-watches',
-  //   'motorcycle',
-  //   'skincare',
-  //   'smartphones',
-  //   'sunglasses',
-  //   'tops',
-  //   'womens-bags',
-  //   'womens-dresses',
-  //   'womens-jewellery',
-  //   'womens-shoes',
-  //   'womens-watches',
-  // ]
+  const { categorySelect, onSelect } = useContext(AppContext)
 
-  //TODO: choose TS type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Option: any = (item: string, index: number) => (
-    <option className={styles.slc__select} value={item} key={index}>
-      {item}
-    </option>
-  )
+  function Category(item: string, index: number) {
+    return (
+      <option className={styles.slc__select} value={item} key={index}>
+        {item}
+      </option>
+    )
+  }
 
   return (
     <select
@@ -42,11 +23,13 @@ export function SelectCategory() {
       name="select"
       id="selectCategory"
       aria-label="Category"
+      value={categorySelect}
+      onChange={onSelect}
     >
       <option className="slc__item slc__point" value="">
         --Category--
       </option>
-      {uniqueCategories.map(Option)}
+      {uniqueCategories.map(Category)}
     </select>
   )
 }

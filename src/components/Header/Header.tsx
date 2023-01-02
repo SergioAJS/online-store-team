@@ -5,7 +5,6 @@ import AppContext from '../../context'
 
 export function Header() {
   const { itemsInCart, cartPrice } = React.useContext(AppContext)
-  console.log(React.useContext(AppContext))
   return (
     <header className={styles.header}>
       <div className={`${styles.header__container} container`}>
