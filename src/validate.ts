@@ -1,4 +1,4 @@
-const validations: boolean[] = [false, false, true, true, true, true, false]
+const validations: boolean[] = [false, false, false, true, true, true, false]
 
 function checkValidity(): void {
   const confirm = document.querySelector('.submit-btn') as HTMLButtonElement
@@ -87,5 +87,55 @@ export function checkAddress(): void {
     }
   }
   checkValidity()
-  console.log(validations, 'validations')
+}
+
+export function checkPhone(): void {
+  const userPhone = document.getElementById('phone') as HTMLInputElement
+  const phoneError: HTMLTemplateElement | null = document.querySelector(
+    '.form__label_phone > span.error'
+  )
+  if (userPhone.validity.valid) {
+    validations[2] = true
+    if (phoneError) {
+      phoneError.textContent = ''
+      phoneError.className = 'error'
+    }
+  } else {
+    validations[2] = false
+    if (phoneError) {
+      if (userPhone.validity.valueMissing) {
+        phoneError.textContent = 'You need to enter your Phonenumber.'
+      } else if (userPhone.validity.patternMismatch) {
+        phoneError.textContent =
+          'Entered value needs to start from + and to be at least 8 numbers long.'
+      }
+      phoneError.className = 'error active'
+    }
+  }
+  checkValidity()
+}
+
+export function checkEmail(): void {
+  const userEmail = document.getElementById('email') as HTMLInputElement
+  const emailError: HTMLTemplateElement | null = document.querySelector(
+    '.form__label_email > span.error'
+  )
+  if (userEmail.validity.valid) {
+    validations[3] = true
+    if (emailError) {
+      emailError.textContent = ''
+      emailError.className = 'error'
+    }
+  } else {
+    validations[3] = false
+    if (emailError) {
+      if (userEmail.validity.valueMissing) {
+        emailError.textContent = 'You need to enter your EMail.'
+      } else if (userEmail.validity.patternMismatch) {
+        emailError.textContent = 'Entered value needs to match email'
+      }
+      emailError.className = 'error active'
+    }
+  }
+  checkValidity()
 }

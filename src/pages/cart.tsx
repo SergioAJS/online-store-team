@@ -7,8 +7,6 @@ export function CartPage() {
   const { cart, onRemoveFromCart, onAddOne, onRemoveOne } =
     React.useContext(AppContext)
 
-  console.log(cart, 'cartArray', typeof cart)
-
   let sectionTitle = 'Cart'
   let isCartNotEmpty = true
   if (cart === undefined || cart.length === 0) {
@@ -17,14 +15,10 @@ export function CartPage() {
   }
 
   const onOpenModal = () => {
-    const backstage = document.querySelector('.black'),
-      modal = document.querySelector('.modal')
-    console.log(modal, 'modal')
-    console.log(backstage, 'backstage')
+    const backstage: HTMLDivElement | null = document.querySelector('.black'),
+      modal: HTMLDivElement | null = document.querySelector('.modal')
     modal?.classList.add('modal__open')
-    console.log(modal, 'modal inside')
     backstage?.classList.add('black_active')
-    console.log(backstage, 'backstage inside')
   }
 
   return (

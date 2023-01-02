@@ -1,7 +1,17 @@
 import React from 'react'
-import { checkCVV, checkName, checkAddress } from '../../validate'
+import {
+  checkCVV,
+  checkName,
+  checkAddress,
+  checkPhone,
+  checkEmail,
+} from '../../validate'
+import AppContext from '../../context'
+import { IProductInCart } from '../../models'
 
 export function SendForms() {
+  const { cart, onRemoveFromCart } = React.useContext(AppContext)
+  console.log(cart)
   return (
     <>
       <form
@@ -9,7 +19,7 @@ export function SendForms() {
         id="form"
         action=""
         autoComplete="off"
-        method="POST"
+        method=""
         noValidate
       >
         <label className="form__label form__label_name" htmlFor="name">
@@ -50,20 +60,22 @@ export function SendForms() {
           name="name"
           type="tel"
           required
-          pattern="^\+[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          pattern="\+[0-9]{8}\d*"
+          onInput={checkPhone}
           placeholder="+- (---) --- -- --"
         />
 
-        <label className="form__label form__label_phone" htmlFor="email">
+        <label className="form__label form__label_email" htmlFor="email">
           EMail<span className="error" aria-live="polite"></span>
         </label>
         <input
           className="form__input form__input_email"
           id="email"
-          name="name"
+          name="email"
           type="email"
           required
-          pattern=".+@globex\.com"
+          pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}"
+          onInput={checkEmail}
           placeholder="name@gmail.com"
         />
 
@@ -122,8 +134,17 @@ export function SendForms() {
 
         <button
           className="contacts__button btn submit-btn btn-gray"
-          type="submit"
           disabled
+          onClick={() => {
+            //  event.preventDefault()
+            console.log('button send')
+            if (cart) {
+              console.log(cart)
+              console.log('button send card')
+              const temp: IProductInCart[] = [...cart]
+              temp.map((x) => onRemoveFromCart(x))
+            }
+          }}
         >
           Submit
         </button>

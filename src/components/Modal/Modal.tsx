@@ -3,8 +3,8 @@ import { SendForms } from '../SendForms'
 
 export function Modal() {
   const onCloseModal = (): void => {
-    const backstage = document.querySelector('.black'),
-      modal = document.querySelector('.modal')
+    const backstage: HTMLDivElement | null = document.querySelector('.black'),
+      modal: HTMLDivElement | null = document.querySelector('.modal')
     backstage?.classList.remove('black_active')
     modal?.classList.remove('modal__open')
   }
