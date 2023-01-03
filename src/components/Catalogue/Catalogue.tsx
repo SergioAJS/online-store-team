@@ -45,6 +45,51 @@ export function Catalogue() {
           .includes((brandSelect || '').toLowerCase()) &&
         product.description
           .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.stock
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.rating
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.discountPercentage
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.category
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
           .includes((productSearch || '').toLowerCase()))
   )
 
