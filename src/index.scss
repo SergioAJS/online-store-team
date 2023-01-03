@@ -573,6 +573,7 @@ input:focus:invalid {
 .main__container {
     display: grid;
     grid-template-columns: 3fr 7fr;
+    gap: 10px;
 }
 
 .creditCardForm {

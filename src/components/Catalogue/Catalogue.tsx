@@ -1,6 +1,7 @@
 import { useProducts } from '../../hooks/products'
 import { Loader } from '../Loader/Loader'
 import { Product } from '../Product/Product'
+import { ProductInLine } from '../Product/ProductInLine'
 import styles from './Catalogue.module.scss'
 import { useContext } from 'react'
 import AppContext from '../../context'
@@ -15,6 +16,7 @@ export function Catalogue() {
     productSearch,
     onSelect,
     sortSelect,
+    viewSelect,
   } = useContext(AppContext)
 
   const filteredProducts = products.filter(
@@ -144,11 +146,29 @@ export function Catalogue() {
           value={productSearch}
           onChange={onSearchProduct}
         />
+        <div>
+          <span>View: </span>
+          <select
+            className={styles.sort}
+            name="select"
+            id="viewProducts"
+            aria-label="View"
+            value={viewSelect}
+            onChange={onSelect}
+          >
+            <option value="Block">Block</option>
+            <option value="Line">Line</option>
+          </select>
+        </div>
       </div>
       <div className={styles.catalogue__container}>
         {loading && <Loader />}
         {filteredProducts.length === 0 ? (
           <p className={styles.not__found}>Products not found</p>
+        ) : viewSelect === 'Line' ? (
+          filteredProducts.map((item) => (
+            <ProductInLine product={item} key={item.id} />
+          ))
         ) : (
           filteredProducts.map((item) => (
             <Product product={item} key={item.id} />

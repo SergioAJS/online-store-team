@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { IProduct } from '../../models'
-import styles from './Product.module.scss'
+import styles from './ProductInLine.module.scss'
 import AppContext from '../../context'
 
 export interface ProductProps {
   product: IProduct
 }
 
-export function Product({ product }: ProductProps) {
+export function ProductInLine({ product }: ProductProps) {
   const { onAddToCart } = React.useContext(AppContext)
   return (
     <div className={styles.product}>
@@ -33,17 +33,22 @@ export function Product({ product }: ProductProps) {
           <li className={styles.characteristic}>
             Your Price: <span className={styles.price}>${product.price}</span>
           </li>
+          <li className={styles.characteristic}>
+            Description:{' '}
+            <span className={styles.description}>{product.description}</span>
+          </li>
         </ul>
-        <img
-          className={styles.product__image}
-          src={product.thumbnail}
-          alt={product.title}
-        />
+        <div className={styles.image__container}>
+          <img
+            className={styles.product__image}
+            src={product.thumbnail}
+            alt={product.title}
+          />
+        </div>
       </div>
       <div className={styles.buttons}>
         <Link
           key={product.id}
-          target="_blank"
           to={`/product/${product.id}`}
           className={styles.product__button}
         >

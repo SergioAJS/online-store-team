@@ -140,11 +140,13 @@ export function App() {
   const queryCategory = search.get('Category') || ''
   const queryProductSearch = search.get('Search') || ''
   const querySort = search.get('Sort') || ''
+  const queryView = search.get('View') || ''
 
   const [brandSelect, setBrandSelect] = useState(queryBrand)
   const [categorySelect, setCategorySelect] = useState(queryCategory)
   const [productSearch, setProductSearch] = useState(queryProductSearch)
   const [sortSelect, setSortSelect] = useState(querySort)
+  const [viewSelect, setViewSelect] = useState(queryView)
 
   function onSelect(e: ChangeEvent<HTMLSelectElement>) {
     const select = e.target.value
@@ -159,6 +161,8 @@ export function App() {
       setCategorySelect(select)
     } else if (e.target.ariaLabel === 'Sort') {
       setSortSelect(select)
+    } else if (e.target.ariaLabel === 'View') {
+      setViewSelect(select)
     }
   }
 
@@ -204,6 +208,7 @@ export function App() {
           onSearchProduct,
           sortSelect,
           onClearFilters,
+          viewSelect,
         }}
       >
         <Header />

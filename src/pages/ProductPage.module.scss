@@ -32,17 +32,23 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+  padding-top: 0;
 
   .product {
     display: flex;
     flex-direction: row-reverse;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     min-height: 400px;
+    margin-bottom: 40px;
 
     .description__container {
-      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
 
       .characteristic {
         margin-bottom: 15px;
@@ -61,7 +67,7 @@
       }
 
       .big__image {
-        min-width: 500px;
+        // min-width: 500px;
 
         .product__image {
           max-height: 100%;
