@@ -43,6 +43,7 @@ export function Product({ product }: ProductProps) {
       <div className={styles.buttons}>
         <Link
           key={product.id}
+          target="_blank"
           to={`/product/${product.id}`}
           className={styles.product__button}
         >

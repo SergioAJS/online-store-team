@@ -32,21 +32,23 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+  padding-top: 0;
 
   .product {
     display: flex;
     flex-direction: row-reverse;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
     min-height: 400px;
+    margin-bottom: 40px;
 
     .description__container {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 300px;
+      width: 40%;
 
       .characteristic {
         margin-bottom: 15px;
