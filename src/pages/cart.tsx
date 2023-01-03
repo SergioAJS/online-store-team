@@ -134,21 +134,29 @@ export function CartPage() {
               <p>Products: {itemsInCart}</p>
               {isApplyPromo1 && isApplyPromo2 ? (
                 <>
-                  <p className="with-promo">{`Total: $${cartPrice}`}</p>
-                  <p>{`Total: $${priceWithPromo}`}</p>
+                  <p className="with-promo">{`Total: $${
+                    cartPrice && cartPrice.toFixed(2)
+                  }`}</p>
+                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
                 </>
               ) : isApplyPromo1 ? (
                 <>
-                  <p className="with-promo">{`Total: $${cartPrice}`}</p>
-                  <p>{`Total: $${priceWithPromo}`}</p>
+                  <p className="with-promo">{`Total: $${
+                    cartPrice && cartPrice.toFixed(2)
+                  }`}</p>
+                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
                 </>
               ) : isApplyPromo2 ? (
                 <>
-                  <p className="with-promo">{`Total: $${cartPrice}`}</p>
-                  <p>{`Total: $${priceWithPromo}`}</p>
+                  <p className="with-promo">{`Total: $${
+                    cartPrice && cartPrice.toFixed(2)
+                  }`}</p>
+                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
                 </>
               ) : (
-                <p className="without-promo">{`Total: $${cartPrice}`}</p>
+                <p className="without-promo">{`Total: $${
+                  cartPrice && cartPrice.toFixed(2)
+                }`}</p>
               )}
               {isApplyPromo1 && isApplyPromo2 ? (
                 <div className="applied-promos">
@@ -198,6 +206,7 @@ export function CartPage() {
                 <></>
               )}
               <input
+                className="promo-search"
                 type="search"
                 name="promo"
                 id="promo"

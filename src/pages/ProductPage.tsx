@@ -72,7 +72,9 @@ export function ProductPage() {
                     </li>
                     <li className={styles.characteristic}>
                       Your Price:{' '}
-                      <span className={styles.price}>${product.price}</span>
+                      <span className={styles.price}>
+                        ${product.price.toFixed(2)}
+                      </span>
                     </li>
                     <li className={styles.characteristic}>
                       Description: <span>{product.description}</span>

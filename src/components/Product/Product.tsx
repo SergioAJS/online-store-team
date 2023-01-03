@@ -31,7 +31,8 @@ export function Product({ product }: ProductProps) {
             Discount: <span>{product.discountPercentage}%</span>
           </li>
           <li className={styles.characteristic}>
-            Your Price: <span className={styles.price}>${product.price}</span>
+            Your Price:{' '}
+            <span className={styles.price}>${product.price.toFixed(2)}</span>
           </li>
           <li className={styles.characteristic}>
             Description:{' '}

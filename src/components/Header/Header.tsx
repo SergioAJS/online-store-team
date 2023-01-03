@@ -43,7 +43,7 @@ export function Header() {
                   ( {itemsInCart} items{' '}
                 </span>
                 <span className={`${styles.nav__bag} bag-totalToPay`}>
-                  ${cartPrice} )
+                  ${cartPrice?.toFixed(2)} )
                 </span>
               </Link>
             </li>
