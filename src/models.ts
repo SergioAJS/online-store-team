@@ -46,6 +46,7 @@ export interface IContext {
   onSearchProduct?: (arg0: ChangeEvent<HTMLInputElement>) => void
   sortSelect?: string
   onClearFilters?: () => void
+  viewSelect?: string
 }
 
 export enum Cards {
