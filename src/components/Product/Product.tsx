@@ -33,6 +33,10 @@ export function Product({ product }: ProductProps) {
           <li className={styles.characteristic}>
             Your Price: <span className={styles.price}>${product.price}</span>
           </li>
+          <li className={styles.characteristic}>
+            Description:{' '}
+            <span className={styles.price}>{product.description}</span>
+          </li>
         </ul>
         <img
           className={styles.product__image}
@@ -43,7 +47,6 @@ export function Product({ product }: ProductProps) {
       <div className={styles.buttons}>
         <Link
           key={product.id}
-          target="_blank"
           to={`/product/${product.id}`}
           className={styles.product__button}
         >
