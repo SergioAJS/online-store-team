@@ -24,7 +24,6 @@ export function SendForms() {
     } else {
       setIsDisabled(true)
     }
-    console.log(validations, 'checkValidity', isDisabled)
   }
   return (
     <>
@@ -49,7 +48,6 @@ export function SendForms() {
           onInput={() => {
             checkName(validations),
             checkValidity()
-            console.log(validations)
 }}
           placeholder="John Gald"
         />
@@ -68,7 +66,6 @@ export function SendForms() {
           onInput={() => {
             checkAddress(validations)
             checkValidity()
-            console.log(validations)
 }
           }
           placeholder="USA Springfield Evergreen"
@@ -87,7 +84,6 @@ export function SendForms() {
           onInput={() => {
             checkPhone(validations)
             checkValidity()
-            console.log(validations)
 }}
           placeholder="+- (---) --- -- --"
         />
@@ -104,7 +100,6 @@ export function SendForms() {
           pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}"
           onInput={() => {checkEmail(validations)
           checkValidity()
-            console.log(validations)
 }}
           placeholder="name@gmail.com"
         />
@@ -167,7 +162,6 @@ export function SendForms() {
                 }
                 checkExpiration(validations)
                 checkValidity()
-                console.log(validations)
               }}
               placeholder="--/--"
             />
@@ -188,7 +182,6 @@ export function SendForms() {
               onInput={() => {
                 checkCVV(validations)
                 checkValidity()
-                console.log(validations)
 }}
             />
           </div>
