@@ -7,6 +7,7 @@ import { Footer } from './components/footer/Footer'
 import { ProductPage } from './pages/ProductPage'
 import AppContext from './context'
 import { IProduct, IProductInCart } from './models'
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
 
 export function App() {
   const [items, setItems] = React.useState<IProduct[]>([])
@@ -221,6 +222,7 @@ export function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AppContext.Provider>
       <Footer />

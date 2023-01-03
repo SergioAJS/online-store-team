@@ -19,11 +19,78 @@ export function Catalogue() {
 
   const filteredProducts = products.filter(
     (product) =>
-      product.category
+      (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
-      product.brand.toLowerCase().includes((brandSelect || '').toLowerCase()) &&
-      product.title.toLowerCase().includes((productSearch || '').toLowerCase())
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.title
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.price
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.description
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.stock
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.rating
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.discountPercentage
+          .toString()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.category
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase())) ||
+      (product.category
+        .toLowerCase()
+        .includes((categorySelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((brandSelect || '').toLowerCase()) &&
+        product.brand
+          .toLowerCase()
+          .includes((productSearch || '').toLowerCase()))
   )
 
   if (sortSelect) {
@@ -80,9 +147,13 @@ export function Catalogue() {
       </div>
       <div className={styles.catalogue__container}>
         {loading && <Loader />}
-        {filteredProducts.map((item) => (
-          <Product product={item} key={item.id} />
-        ))}
+        {filteredProducts.length === 0 ? (
+          <p className={styles.not__found}>Products not found</p>
+        ) : (
+          filteredProducts.map((item) => (
+            <Product product={item} key={item.id} />
+          ))
+        )}
       </div>
     </section>
   )

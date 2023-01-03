@@ -35,7 +35,7 @@ export function ProductPage() {
 
   return (
     <main className="main">
-      {product && (
+      {product && product.id > 0 && product.id < 21 ? (
         <>
           <h1 className={styles.title}>{product.title}</h1>
           <div className={`${styles.main__container} container`}>
@@ -74,6 +74,9 @@ export function ProductPage() {
                       Your Price:{' '}
                       <span className={styles.price}>${product.price}</span>
                     </li>
+                    <li className={styles.characteristic}>
+                      Description: <span>{product.description}</span>
+                    </li>
                   </ul>
                 </div>
                 <div className={styles.images}>
@@ -106,6 +109,10 @@ export function ProductPage() {
             </section>
           </div>
         </>
+      ) : (
+        <div className={`${styles.main__container} container`}>
+          <div className={styles.not__found}>Product not Found</div>
+        </div>
       )}
     </main>
   )

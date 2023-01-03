@@ -41,7 +41,7 @@ export interface IContext {
   onRemoveOne?: (arg0: IProductInCart) => void
   brandSelect?: string
   categorySelect?: string
-  onSelect?: (aeg0: ChangeEvent<HTMLSelectElement>) => void
+  onSelect?: (arg0: ChangeEvent<HTMLSelectElement>) => void
   productSearch?: string
   onSearchProduct?: (arg0: ChangeEvent<HTMLInputElement>) => void
   sortSelect?: string
