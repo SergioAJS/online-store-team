@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../Product/Product.module.scss'
+import styles from './ToCartBtn.module.scss'
 import AppContext from '../../context'
 import { ProductProps } from '../Product/Product'
 import { IProductInCart } from '../../models'
