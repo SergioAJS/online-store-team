@@ -5,7 +5,7 @@ import { ProductProps } from '../Product/Product'
 import { IProductInCart } from '../../models'
 
 export function ToCartBtn({ product }: ProductProps) {
-  const { cart, onAddToCart } = React.useContext(AppContext)
+  const { cart, onAddToCart, onRemoveFromCart } = React.useContext(AppContext)
   const [innerText, setInnerText] = React.useState<string>('To Cart')
 
   React.useEffect(() => {
@@ -16,14 +16,21 @@ export function ToCartBtn({ product }: ProductProps) {
         ) !== undefined
       )
     }
-    setInnerText(isInCart(product.id) ? 'In Cart' : 'To Cart')
+    setInnerText(isInCart(product.id) ? 'Remove' : 'Add to Cart')
   }, [cart, cart?.length, product.id])
 
   return (
     <>
       <button
         className={styles.product__button}
-        onClick={() => onAddToCart?.(product)}
+        onClick={
+          innerText === 'Add to Cart'
+            ? () => onAddToCart?.(product)
+            : () =>
+                cart?.map((item) => {
+                  if (product.id === item.id) onRemoveFromCart?.(item)
+                })
+        }
       >
         {innerText}
       </button>
