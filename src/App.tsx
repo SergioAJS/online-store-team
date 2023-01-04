@@ -41,10 +41,6 @@ export function App() {
             { inCart: 1 }
           )
           localStorage.setItem('cart', JSON.stringify([...prev, newObj]))
-          console.log(
-            [...prev, obj].map((x) => x.id),
-            'after added new'
-          )
           return [...prev, newObj]
         })
         setItemsInCart((prev) => {
@@ -58,7 +54,6 @@ export function App() {
       }
     } catch (error) {
       alert('Error while add to cart')
-      console.error(error)
     }
   }
 
@@ -78,12 +73,6 @@ export function App() {
               ...prev.slice(0, findIndex),
               ...prev.slice(findIndex + 1),
             ])
-          )
-          console.log(
-            [...prev.slice(0, findIndex), ...prev.slice(findIndex + 1)].map(
-              (x) => x.id
-            ),
-            'after deleted'
           )
           return [...prev.slice(0, findIndex), ...prev.slice(findIndex + 1)]
         })

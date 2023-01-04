@@ -1,15 +1,5 @@
-const validations: boolean[] = [false, false, false, true, true, true, false]
 
-function checkValidity(): void {
-  const confirm = document.querySelector('.submit-btn') as HTMLButtonElement
-  if (validations.every((x) => x)) {
-    confirm.disabled = false
-  } else {
-    confirm.disabled = true
-  }
-}
-
-export function checkCVV(): void {
+export function checkCVV(validations : boolean[]): void {
   const userCvv = document.getElementById('cvv') as HTMLInputElement
   const cvvError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_cvv > span.error'
@@ -34,10 +24,9 @@ export function checkCVV(): void {
       if (cvvError) cvvError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkName(): void {
+export function checkName(validations: boolean[]): void {
   const userName = document.getElementById('name') as HTMLInputElement
   const nameError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_name > span.error'
@@ -60,10 +49,9 @@ export function checkName(): void {
       nameError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkAddress(): void {
+export function checkAddress(validations: boolean[]): void {
   const userAddress = document.getElementById('address') as HTMLInputElement
   const addressError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_address > span.error'
@@ -86,10 +74,9 @@ export function checkAddress(): void {
       addressError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkPhone(): void {
+export function checkPhone(validations: boolean[]): void {
   const userPhone = document.getElementById('phone') as HTMLInputElement
   const phoneError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_phone > span.error'
@@ -112,10 +99,9 @@ export function checkPhone(): void {
       phoneError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkEmail(): void {
+export function checkEmail(validations: boolean[]): void {
   const userEmail = document.getElementById('email') as HTMLInputElement
   const emailError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_email > span.error'
@@ -137,10 +123,9 @@ export function checkEmail(): void {
       emailError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkCardNumber(): void {
+export function checkCardNumber(validations: boolean[]): void {
   const userCardNumber = document.getElementById(
     'cardNumber'
   ) as HTMLInputElement
@@ -165,10 +150,9 @@ export function checkCardNumber(): void {
       cardlError.className = 'error active'
     }
   }
-  checkValidity()
 }
 
-export function checkExpiration(): void {
+export function checkExpiration(validations: boolean[]): void {
   const userExpiration = document.getElementById('date') as HTMLInputElement
   const cardlError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_date > span.error'
@@ -191,5 +175,4 @@ export function checkExpiration(): void {
       cardlError.className = 'error active'
     }
   }
-  checkValidity()
 }

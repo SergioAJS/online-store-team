@@ -8,18 +8,29 @@ import {
   checkCardNumber,
   checkExpiration,
 } from '../../validate'
-import AppContext from '../../context'
-import { IProductInCart, Cards } from '../../models'
+import { Cards } from '../../models'
+
+const validations: boolean[] = [false, false, false, false, false, false, false]
 
 export function SendForms() {
-  const { cart, onRemoveFromCart } = React.useContext(AppContext)
   const [card, setCard] = React.useState<Cards>(Cards.Other)
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(true)
+
+
+  const checkValidity = (): void => {
+    const confirm = document.querySelector('.submit-btn') as HTMLButtonElement
+    if (validations.every((x) => x)) {
+      setIsDisabled(false)
+    } else {
+      setIsDisabled(true)
+    }
+  }
   return (
     <>
       <form
         className="order__form form"
         id="form"
-        action=""
+        action="/"
         autoComplete="off"
         method=""
         noValidate
@@ -34,7 +45,10 @@ export function SendForms() {
           type="text"
           required
           pattern=".*([a-zA-Z]{3,}).\b([a-zA-Z]{3,}).*"
-          onInput={checkName}
+          onInput={() => {
+            checkName(validations),
+            checkValidity()
+}}
           placeholder="John Gald"
         />
 
@@ -49,7 +63,11 @@ export function SendForms() {
           type="text"
           required
           pattern="([a-zA-Z]{5,}).\b([a-zA-Z]{5,}).\b([a-zA-Z]{5,}).*"
-          onInput={checkAddress}
+          onInput={() => {
+            checkAddress(validations)
+            checkValidity()
+}
+          }
           placeholder="USA Springfield Evergreen"
         />
 
@@ -63,7 +81,10 @@ export function SendForms() {
           type="tel"
           required
           pattern="\+[0-9]{8}\d*"
-          onInput={checkPhone}
+          onInput={() => {
+            checkPhone(validations)
+            checkValidity()
+}}
           placeholder="+- (---) --- -- --"
         />
 
@@ -77,7 +98,9 @@ export function SendForms() {
           type="email"
           required
           pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}"
-          onInput={checkEmail}
+          onInput={() => {checkEmail(validations)
+          checkValidity()
+}}
           placeholder="name@gmail.com"
         />
 
@@ -98,7 +121,9 @@ export function SendForms() {
               required
               pattern="^[3-5]{1}[0-9]{15}$"
               onInput={(): void => {
-                checkCardNumber()
+                checkCardNumber(validations)
+                checkValidity()
+                console.log(validations)
                 const userCardNumber = document.getElementById(
                   'cardNumber'
                 ) as HTMLInputElement
@@ -135,7 +160,8 @@ export function SendForms() {
                   temp += '/'
                   userExpiration.value = temp
                 }
-                checkExpiration()
+                checkExpiration(validations)
+                checkValidity()
               }}
               placeholder="--/--"
             />
@@ -153,7 +179,10 @@ export function SendForms() {
               id="cvv"
               pattern="^[0-9]{3}$"
               required
-              onInput={checkCVV}
+              onInput={() => {
+                checkCVV(validations)
+                checkValidity()
+}}
             />
           </div>
           <div className="form-group credit-card" id="credit_cards">
@@ -163,17 +192,18 @@ export function SendForms() {
 
         <button
           className="contacts__button btn submit-btn btn-gray"
-          disabled
-          onClick={() => {
-            //  event.preventDefault()
-            console.log('button send')
-            if (cart) {
-              console.log(cart)
-              console.log('button send card')
-              const temp: IProductInCart[] = [...cart]
-              temp.map((x) => onRemoveFromCart?.(x))
-            }
+          onClick={(event) => {
+            event.preventDefault()
+            const head = document.getElementById(
+              'form'
+            ) as HTMLFormElement
+            const message: HTMLDivElement = document.createElement('div');
+            message.innerHTML = "The order was send"
+            head.insertAdjacentHTML('beforebegin', '<div style="width:500px;height:40px;background-color:#ffcc00;font-size:36px">The order was send</div>')
+            localStorage.clear()
+            setTimeout(() => window.location.replace("/"), 3100)
           }}
+          disabled={isDisabled}
         >
           Submit
         </button>
