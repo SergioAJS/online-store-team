@@ -31,7 +31,12 @@ export function Product({ product }: ProductProps) {
             Discount: <span>{product.discountPercentage}%</span>
           </li>
           <li className={styles.characteristic}>
-            Your Price: <span className={styles.price}>${product.price}</span>
+            Your Price:{' '}
+            <span className={styles.price}>${product.price.toFixed(2)}</span>
+          </li>
+          <li className={styles.characteristic}>
+            Description:{' '}
+            <span className={styles.price}>{product.description}</span>
           </li>
         </ul>
         <img
@@ -43,7 +48,6 @@ export function Product({ product }: ProductProps) {
       <div className={styles.buttons}>
         <Link
           key={product.id}
-          target="_blank"
           to={`/product/${product.id}`}
           className={styles.product__button}
         >
