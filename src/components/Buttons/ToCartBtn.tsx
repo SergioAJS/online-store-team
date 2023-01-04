@@ -27,7 +27,7 @@ export function ToCartBtn({ product }: ProductProps) {
           innerText === 'Add to Cart'
             ? () => onAddToCart?.(product)
             : () =>
-                cart?.map((item) => {
+                cart?.find((item) => {
                   if (product.id === item.id) onRemoveFromCart?.(item)
                 })
         }
