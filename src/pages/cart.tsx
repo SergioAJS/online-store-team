@@ -34,8 +34,6 @@ export function CartPage() {
   const [isApplyPromo1, setIsApplyPromo1] = useState(false)
   const [isApplyPromo2, setIsApplyPromo2] = useState(false)
 
-  const [priceWithPromo, setPriceWithPromo] = useState(0)
-
   function onEnterPromo(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault()
     const enteredPromo = e.target.value
@@ -53,42 +51,18 @@ export function CartPage() {
 
   function onApplyPromo1() {
     setIsApplyPromo1(true)
-    if (isValidPromo1 && isApplyPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.75)
-    }
-    if (isValidPromo1) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.9)
-    }
   }
 
   function onApplyPromo2() {
     setIsApplyPromo2(true)
-    if (isApplyPromo1 && isValidPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.75)
-    }
-    if (isValidPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.85)
-    }
   }
 
   function onDenyPromo1() {
     setIsApplyPromo1(false)
-    if (cartPrice)
-      if (isApplyPromo2) {
-        return setPriceWithPromo(cartPrice * 0.85)
-      } else {
-        return cartPrice
-      }
   }
 
   function onDenyPromo2() {
     setIsApplyPromo2(false)
-    if (cartPrice)
-      if (isApplyPromo1) {
-        return setPriceWithPromo(cartPrice * 0.9)
-      } else {
-        return cartPrice
-      }
   }
 
   return (
@@ -132,26 +106,26 @@ export function CartPage() {
             <div className="summary">
               <h2 className="section-title">Summary</h2>
               <p>Products: {itemsInCart}</p>
-              {isApplyPromo1 && isApplyPromo2 ? (
+              {isApplyPromo1 && isApplyPromo2 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.75).toFixed(2)}`}</p>
                 </>
-              ) : isApplyPromo1 ? (
+              ) : isApplyPromo1 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.9).toFixed(2)}`}</p>
                 </>
-              ) : isApplyPromo2 ? (
+              ) : isApplyPromo2 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.85).toFixed(2)}`}</p>
                 </>
               ) : (
                 <p className="without-promo">{`Total: $${
