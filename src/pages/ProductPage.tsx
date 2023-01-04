@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { IProduct } from '../models'
 import axios, { AxiosError } from 'axios'
 import styles from './ProductPage.module.scss'
 import { ToCartBtn } from '../components/Buttons/ToCartBtn'
+import AppContext from '../context'
 
 export function ProductPage() {
   const { id } = useParams()
   const [product, setProduct] = useState<IProduct>()
   const [image, setImage] = useState('')
+  const { onAddToCart } = React.useContext(AppContext)
+  const navigate = useNavigate()
 
   async function fetchProduct() {
     try {
@@ -97,7 +100,15 @@ export function ProductPage() {
               </div>
               <div className={styles.buttons}>
                 <ToCartBtn product={product} />
-                <button className={styles.product__button}>Buy Now</button>
+                <button
+                  className={styles.product__button}
+                  onClick={() => {
+                    onAddToCart?.(product)
+                    navigate('/cart', { state: { modalOuter: true } })
+                  }}
+                >
+                  Buy Now
+                </button>
               </div>
             </section>
           </div>

@@ -47,6 +47,8 @@ export interface IContext {
   sortSelect?: string
   onClearFilters?: () => void
   viewSelect?: string
+  modal?: boolean
+  setModal?: Dispatch<boolean>
 }
 
 export enum Cards {
