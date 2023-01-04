@@ -9,6 +9,7 @@ export function ProductPage() {
   const { id } = useParams()
   const [product, setProduct] = useState<IProduct>()
   const [image, setImage] = useState('')
+  const [uniqueImages, setUniqueImages] = useState([''])
 
   async function fetchProduct() {
     try {
@@ -26,33 +27,31 @@ export function ProductPage() {
     fetchProduct()
   }, [])
 
-  const images: object = {}
-
-  const options = {
-    method: 'HEAD',
-  }
-
-  product?.images &&
-    fetch(product?.images[0], options).then((resp) => {
-      if (!resp.ok) throw resp.statusText
-      console.log(resp.headers.get('content-length'))
-    })
   useEffect(() => {
-    product?.images &&
-      Promise.all(product.images.map((item) => fetch(item, options))).then(
-        (responses) => {
-          for (const response of responses) {
-            /* eslint-disable  @typescript-eslint/no-explicit-any */
-            ;(images as any)[
-              new URL(response.url).pathname as keyof typeof images
-            ] = response.headers.get('content-length')
-            console.log({ images })
-          }
-        }
-      )
-  })
+    const options = {
+      method: 'HEAD',
+    }
 
-  // console.log(images)
+    product?.images &&
+      Promise.all(product.images.map((item) => fetch(item, options)))
+        .then((responses) => {
+          const duplicates: { link: string; size: string | null }[] = []
+          for (const response of responses) {
+            duplicates.push({
+              link: response.url,
+              size: response.headers.get('content-length'),
+            })
+          }
+          const unique = duplicates.filter(
+            (item, index) =>
+              duplicates.findIndex((obj) => obj.size === item.size) === index
+          )
+          const uniqueArray: string[] = []
+          unique.map((item) => uniqueArray.push(item.link))
+          setUniqueImages(uniqueArray)
+        })
+        .catch((err) => console.error(err))
+  }, [product?.images])
 
   return (
     <main className="main">
@@ -104,7 +103,7 @@ export function ProductPage() {
                 </div>
                 <div className={styles.images}>
                   <div className={styles.small__images}>
-                    {product.images?.map((image) => (
+                    {uniqueImages?.map((image) => (
                       <img
                         src={image}
                         key={image}
