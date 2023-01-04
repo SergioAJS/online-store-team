@@ -120,7 +120,6 @@ export function SendForms() {
               onInput={(): void => {
                 checkCardNumber(validations)
                 checkValidity()
-                console.log(validations)
                 const userCardNumber = document.getElementById(
                   'cardNumber'
                 ) as HTMLInputElement

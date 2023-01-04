@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
+import { useLocation } from 'react-router-dom'
 
 export function CartPage() {
   const {
@@ -11,8 +12,9 @@ export function CartPage() {
     onRemoveOne,
     itemsInCart,
     cartPrice,
+    modal,
+    setModal,
   } = React.useContext(AppContext)
-
   let sectionTitle = 'Cart'
   let isCartNotEmpty = true
   if (cart === undefined || cart.length === 0) {
@@ -20,11 +22,14 @@ export function CartPage() {
     sectionTitle = 'YOUR CART IS EMPTY'
   }
 
+  const { state } = useLocation()
+  if (state) {
+    const { modalOuter } = state
+    if (modalOuter) setModal?.(modalOuter)
+  }
+
   const onOpenModal = () => {
-    const backstage: HTMLDivElement | null = document.querySelector('.black'),
-      modal: HTMLDivElement | null = document.querySelector('.modal')
-    modal?.classList.add('modal__open')
-    backstage?.classList.add('black_active')
+    setModal?.(true)
   }
 
   const promo1 = ['rs', 10]
@@ -230,7 +235,12 @@ export function CartPage() {
                   </button>
                 </div>
               )}
-              <button className="confirm-btn" onClick={() => onOpenModal()}>
+              <button
+                className="confirm-btn"
+                onClick={() => {
+                  if (!modal) onOpenModal()
+                }}
+              >
                 Confirm order
               </button>
             </div>

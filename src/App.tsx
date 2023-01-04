@@ -147,10 +147,10 @@ export function App() {
   const [productSearch, setProductSearch] = useState(queryProductSearch)
   const [sortSelect, setSortSelect] = useState(querySort)
   const [viewSelect, setViewSelect] = useState(queryView)
+  const [modal, setModal] = useState<boolean>(false)
 
   function onSelect(e: ChangeEvent<HTMLSelectElement>) {
     const select = e.target.value
-    console.log(select)
     select
       ? search.set(`${e.target.ariaLabel}`, `${select}`)
       : search.delete(`${e.target.ariaLabel}`)
@@ -186,7 +186,6 @@ export function App() {
 
   return (
     <div className="site-container">
-      <div className="black"></div>
       <AppContext.Provider
         value={{
           items,
@@ -209,8 +208,18 @@ export function App() {
           sortSelect,
           onClearFilters,
           viewSelect,
+          modal,
+          setModal,
         }}
       >
+        <div
+          className="black"
+          style={
+            modal
+              ? { visibility: 'visible', zIndex: 15 }
+              : { visibility: 'hidden', zIndex: -1 }
+          }
+        ></div>
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
