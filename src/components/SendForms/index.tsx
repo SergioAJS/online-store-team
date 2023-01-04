@@ -16,9 +16,7 @@ export function SendForms() {
   const [card, setCard] = React.useState<Cards>(Cards.Other)
   const [isDisabled, setIsDisabled] = React.useState<boolean>(true)
 
-
   const checkValidity = (): void => {
-    const confirm = document.querySelector('.submit-btn') as HTMLButtonElement
     if (validations.every((x) => x)) {
       setIsDisabled(false)
     } else {
@@ -46,9 +44,8 @@ export function SendForms() {
           required
           pattern=".*([a-zA-Z]{3,}).\b([a-zA-Z]{3,}).*"
           onInput={() => {
-            checkName(validations),
-            checkValidity()
-}}
+            checkName(validations), checkValidity()
+          }}
           placeholder="John Gald"
         />
 
@@ -66,8 +63,7 @@ export function SendForms() {
           onInput={() => {
             checkAddress(validations)
             checkValidity()
-}
-          }
+          }}
           placeholder="USA Springfield Evergreen"
         />
 
@@ -84,7 +80,7 @@ export function SendForms() {
           onInput={() => {
             checkPhone(validations)
             checkValidity()
-}}
+          }}
           placeholder="+- (---) --- -- --"
         />
 
@@ -98,9 +94,10 @@ export function SendForms() {
           type="email"
           required
           pattern="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}"
-          onInput={() => {checkEmail(validations)
-          checkValidity()
-}}
+          onInput={() => {
+            checkEmail(validations)
+            checkValidity()
+          }}
           placeholder="name@gmail.com"
         />
 
@@ -182,7 +179,7 @@ export function SendForms() {
               onInput={() => {
                 checkCVV(validations)
                 checkValidity()
-}}
+              }}
             />
           </div>
           <div className="form-group credit-card" id="credit_cards">
@@ -194,14 +191,15 @@ export function SendForms() {
           className="contacts__button btn submit-btn btn-gray"
           onClick={(event) => {
             event.preventDefault()
-            const head = document.getElementById(
-              'form'
-            ) as HTMLFormElement
-            const message: HTMLDivElement = document.createElement('div');
-            message.innerHTML = "The order was send"
-            head.insertAdjacentHTML('beforebegin', '<div style="width:500px;height:40px;background-color:#ffcc00;font-size:36px">The order was send</div>')
+            const head = document.getElementById('form') as HTMLFormElement
+            const message: HTMLDivElement = document.createElement('div')
+            message.innerHTML = 'The order was send'
+            head.insertAdjacentHTML(
+              'beforebegin',
+              '<div style="width:500px;height:40px;background-color:#ffcc00;font-size:36px">The order was send</div>'
+            )
             localStorage.clear()
-            setTimeout(() => window.location.replace("/"), 3100)
+            setTimeout(() => window.location.replace('/'), 3100)
           }}
           disabled={isDisabled}
         >
