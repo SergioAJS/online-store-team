@@ -2,14 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { IProduct } from '../../models'
 import styles from './ProductInLine.module.scss'
-import AppContext from '../../context'
+import { ToCartBtn } from '../Buttons/ToCartBtn'
 
 export interface ProductProps {
   product: IProduct
 }
 
 export function ProductInLine({ product }: ProductProps) {
-  const { onAddToCart } = React.useContext(AppContext)
   return (
     <div className={styles.product}>
       <h3 className={styles.title}>{product.title}</h3>
@@ -55,12 +54,7 @@ export function ProductInLine({ product }: ProductProps) {
         >
           Details
         </Link>
-        <button
-          className={styles.product__button}
-          onClick={() => onAddToCart?.(product)}
-        >
-          To Cart
-        </button>
+        <ToCartBtn product={product} />
       </div>
     </div>
   )
