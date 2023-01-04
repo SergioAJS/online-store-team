@@ -3,10 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import { IProduct } from '../models'
 import axios, { AxiosError } from 'axios'
 import styles from './ProductPage.module.scss'
-import AppContext from '../context'
+import { ToCartBtn } from '../components/Buttons/ToCartBtn'
 
 export function ProductPage() {
-  const { onAddToCart } = React.useContext(AppContext)
   const { id } = useParams()
   const [product, setProduct] = useState<IProduct>()
   const [image, setImage] = useState('')
@@ -26,12 +25,6 @@ export function ProductPage() {
   useEffect(() => {
     fetchProduct()
   }, [])
-
-  const AddToCart = () => {
-    if (product) {
-      onAddToCart?.(product)
-    }
-  }
 
   return (
     <main className="main">
@@ -101,9 +94,7 @@ export function ProductPage() {
                 </div>
               </div>
               <div className={styles.buttons}>
-                <button className={styles.product__button} onClick={AddToCart}>
-                  To Cart
-                </button>
+                <ToCartBtn product={product} />
                 <button className={styles.product__button}>Buy Now</button>
               </div>
             </section>
