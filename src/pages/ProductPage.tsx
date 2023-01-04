@@ -26,6 +26,34 @@ export function ProductPage() {
     fetchProduct()
   }, [])
 
+  const images: object = {}
+
+  const options = {
+    method: 'HEAD',
+  }
+
+  product?.images &&
+    fetch(product?.images[0], options).then((resp) => {
+      if (!resp.ok) throw resp.statusText
+      console.log(resp.headers.get('content-length'))
+    })
+  useEffect(() => {
+    product?.images &&
+      Promise.all(product.images.map((item) => fetch(item, options))).then(
+        (responses) => {
+          for (const response of responses) {
+            /* eslint-disable  @typescript-eslint/no-explicit-any */
+            ;(images as any)[
+              new URL(response.url).pathname as keyof typeof images
+            ] = response.headers.get('content-length')
+            console.log({ images })
+          }
+        }
+      )
+  })
+
+  // console.log(images)
+
   return (
     <main className="main">
       {product && product.id > 0 && product.id < 21 ? (
