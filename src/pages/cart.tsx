@@ -4,6 +4,7 @@ import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
 import { useLocation } from 'react-router-dom'
 import { CartPagination } from '../components/CartPagination/CartPagination'
+import styles from './cart.module.scss'
 
 export function CartPage() {
   const {
@@ -105,39 +106,55 @@ export function CartPage() {
       <section className="section">
         <div className="cart container">
           <div className="cart__container">
+            {/* {cart &&
+              cart.map((item, index) => (
+                <p key={index}>{currentPage * productsPerPage - index}</p>
+              ))} */}
             <h2 className="catalog__title section-title">{sectionTitle}</h2>
-            <ol className="card__list">
+            <ul className="card__list">
               {cart &&
-                currentProducts?.map((item) => (
-                  <li className="card__item" key={item.id}>
-                    <ProductInCart product={item} key={item.id} />
-                    <button
-                      className="card__buttons btn-gray"
-                      onClick={() => onAddOne?.(item)}
-                    >
-                      +
-                    </button>
-                    <span className="card__quantity">{item.inCart}</span>
-                    <button
-                      className="card__buttons btn-gray"
-                      onClick={() => onRemoveOne?.(item)}
-                    >
-                      -
-                    </button>
-                    <button
-                      className="btn card__button delete-btn delete-btn-visible"
-                      data-index={item.id}
-                      title="Remove from cart"
-                      onClick={() => onRemoveFromCart?.(item)}
-                    >
-                      X
-                    </button>
-                  </li>
+                currentProducts?.map((item, index) => (
+                  <div className={styles.card__container} key={item.id}>
+                    <p>
+                      {currentPage * productsPerPage +
+                        index -
+                        productsPerPage +
+                        1}
+                    </p>
+                    <li className="card__item" key={item.id}>
+                      <ProductInCart product={item} />
+                      <button
+                        className="card__buttons btn-gray"
+                        onClick={() => onAddOne?.(item)}
+                      >
+                        +
+                      </button>
+                      <span className="card__quantity">{item.inCart}</span>
+                      <button
+                        className="card__buttons btn-gray"
+                        onClick={() => onRemoveOne?.(item)}
+                      >
+                        -
+                      </button>
+                      <button
+                        className="btn card__button delete-btn delete-btn-visible"
+                        data-index={item.id}
+                        title="Remove from cart"
+                        onClick={() => onRemoveFromCart?.(item)}
+                      >
+                        X
+                      </button>
+                    </li>
+                  </div>
                 ))}
-            </ol>
-            <button onClick={decreaseProductsPerPage}>{'<'}</button>
-            <p>{productsPerPage}</p>
-            <button onClick={increaseProductsPerPage}>{'>'}</button>
+            </ul>
+            {isCartNotEmpty && (
+              <>
+                <button onClick={decreaseProductsPerPage}>{'<'}</button>
+                <p>{productsPerPage}</p>
+                <button onClick={increaseProductsPerPage}>{'>'}</button>
+              </>
+            )}
             <CartPagination
               productsPerPage={productsPerPage}
               totalProductsInCart={cart?.length}

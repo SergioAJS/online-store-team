@@ -168,7 +168,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  counter-reset: item;
+  // counter-reset: item;
 }
 
 .card__item {
@@ -179,10 +179,10 @@ section {
   max-width: 700px;
 }
 
-.card__item::before {
-  content: counter(item) ')  ';
-  counter-increment: item;
-}
+// .card__item::before {
+//   content: counter(item) ')  ';
+//   counter-increment: item;
+// }
 
 .card__picture {
   display: block;
