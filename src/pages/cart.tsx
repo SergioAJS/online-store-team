@@ -133,6 +133,7 @@ export function CartPage() {
             <CartPagination
               productsPerPage={productsPerPage}
               totalProductsInCart={cart?.length}
+              currentProducts={currentProducts}
               paginate={paginate}
             />
           </div>

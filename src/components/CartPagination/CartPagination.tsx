@@ -1,14 +1,18 @@
+import { useEffect } from 'react'
+import { IProductInCart } from '../../models'
 import styles from './CartPagination.module.scss'
 
 export interface CartPaginationProps {
   productsPerPage: number
   totalProductsInCart?: number
+  currentProducts: IProductInCart[] | undefined
   paginate: (arg0: number) => void
 }
 
 export function CartPagination({
   productsPerPage,
   totalProductsInCart,
+  currentProducts,
   paginate,
 }: CartPaginationProps) {
   const pageNumbers = []
@@ -22,6 +26,11 @@ export function CartPagination({
       pageNumbers.push(i)
     }
   }
+  useEffect(() => {
+    if (currentProducts?.length === 0) {
+      paginate(pageNumbers.length)
+    }
+  }, [currentProducts?.length, pageNumbers.length, paginate])
 
   return (
     <div>
