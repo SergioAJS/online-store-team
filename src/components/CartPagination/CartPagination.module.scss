@@ -1,0 +1,11 @@
+.page__numbers {
+  display: flex;
+  gap: 10px;
+
+  .page__number {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid blue;
+  }
+}

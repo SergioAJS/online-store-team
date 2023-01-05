@@ -3,6 +3,7 @@ import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
 import { useLocation } from 'react-router-dom'
+import { CartPagination } from '../components/CartPagination/CartPagination'
 
 export function CartPage() {
   const {
@@ -70,6 +71,26 @@ export function CartPage() {
     setIsApplyPromo2(false)
   }
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [productsPerPage, setProductsPage] = useState(3)
+  // const [currentProducts, setCurrentProducts] = useState()
+
+  const lastProductIndex = currentPage * productsPerPage
+  const firstProductIndex = lastProductIndex - productsPerPage
+  const currentProducts = cart?.slice(firstProductIndex, lastProductIndex)
+
+  function paginate(pageNumber: number) {
+    setCurrentPage(pageNumber)
+  }
+
+  function increaseProductsPerPage() {
+    setProductsPage(productsPerPage + 1)
+  }
+
+  function decreaseProductsPerPage() {
+    setProductsPage(productsPerPage - 1)
+  }
+
   return (
     <main className="main">
       <h1 className="visually-hidden">Cart</h1>
@@ -79,7 +100,7 @@ export function CartPage() {
             <h2 className="catalog__title section-title">{sectionTitle}</h2>
             <ol className="card__list">
               {cart &&
-                cart.map((item) => (
+                currentProducts?.map((item) => (
                   <li className="card__item" key={item.id}>
                     <ProductInCart product={item} key={item.id} />
                     <button
@@ -106,6 +127,14 @@ export function CartPage() {
                   </li>
                 ))}
             </ol>
+            <button onClick={decreaseProductsPerPage}>{'<'}</button>
+            <p>{productsPerPage}</p>
+            <button onClick={increaseProductsPerPage}>{'>'}</button>
+            <CartPagination
+              productsPerPage={productsPerPage}
+              totalProductsInCart={cart?.length}
+              paginate={paginate}
+            />
           </div>
           {isCartNotEmpty && (
             <div className="summary">
