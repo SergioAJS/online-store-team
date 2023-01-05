@@ -1,5 +1,4 @@
-
-export function checkCVV(validations : boolean[]): void {
+export function checkCVV(validations: boolean[]): void {
   const userCvv = document.getElementById('cvv') as HTMLInputElement
   const cvvError: HTMLTemplateElement | null = document.querySelector(
     '.form__label_cvv > span.error'

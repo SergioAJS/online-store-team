@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
+import { useLocation } from 'react-router-dom'
 
 export function CartPage() {
   const {
@@ -11,8 +12,9 @@ export function CartPage() {
     onRemoveOne,
     itemsInCart,
     cartPrice,
+    modal,
+    setModal,
   } = React.useContext(AppContext)
-
   let sectionTitle = 'Cart'
   let isCartNotEmpty = true
   if (cart === undefined || cart.length === 0) {
@@ -20,11 +22,14 @@ export function CartPage() {
     sectionTitle = 'YOUR CART IS EMPTY'
   }
 
+  const { state } = useLocation()
+  if (state) {
+    const { modalOuter } = state
+    if (modalOuter) setModal?.(modalOuter)
+  }
+
   const onOpenModal = () => {
-    const backstage: HTMLDivElement | null = document.querySelector('.black'),
-      modal: HTMLDivElement | null = document.querySelector('.modal')
-    modal?.classList.add('modal__open')
-    backstage?.classList.add('black_active')
+    setModal?.(true)
   }
 
   const promo1 = ['rs', 10]
@@ -33,8 +38,6 @@ export function CartPage() {
   const [isValidPromo2, setIsValidPromo2] = useState(false)
   const [isApplyPromo1, setIsApplyPromo1] = useState(false)
   const [isApplyPromo2, setIsApplyPromo2] = useState(false)
-
-  const [priceWithPromo, setPriceWithPromo] = useState(0)
 
   function onEnterPromo(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault()
@@ -53,42 +56,18 @@ export function CartPage() {
 
   function onApplyPromo1() {
     setIsApplyPromo1(true)
-    if (isValidPromo1 && isApplyPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.75)
-    }
-    if (isValidPromo1) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.9)
-    }
   }
 
   function onApplyPromo2() {
     setIsApplyPromo2(true)
-    if (isApplyPromo1 && isValidPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.75)
-    }
-    if (isValidPromo2) {
-      if (cartPrice) return setPriceWithPromo(cartPrice * 0.85)
-    }
   }
 
   function onDenyPromo1() {
     setIsApplyPromo1(false)
-    if (cartPrice)
-      if (isApplyPromo2) {
-        return setPriceWithPromo(cartPrice * 0.85)
-      } else {
-        return cartPrice
-      }
   }
 
   function onDenyPromo2() {
     setIsApplyPromo2(false)
-    if (cartPrice)
-      if (isApplyPromo1) {
-        return setPriceWithPromo(cartPrice * 0.9)
-      } else {
-        return cartPrice
-      }
   }
 
   return (
@@ -132,26 +111,26 @@ export function CartPage() {
             <div className="summary">
               <h2 className="section-title">Summary</h2>
               <p>Products: {itemsInCart}</p>
-              {isApplyPromo1 && isApplyPromo2 ? (
+              {isApplyPromo1 && isApplyPromo2 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.75).toFixed(2)}`}</p>
                 </>
-              ) : isApplyPromo1 ? (
+              ) : isApplyPromo1 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.9).toFixed(2)}`}</p>
                 </>
-              ) : isApplyPromo2 ? (
+              ) : isApplyPromo2 && cartPrice ? (
                 <>
                   <p className="with-promo">{`Total: $${
                     cartPrice && cartPrice.toFixed(2)
                   }`}</p>
-                  <p>{`Total: $${priceWithPromo.toFixed(2)}`}</p>
+                  <p>{`Total: $${(cartPrice * 0.85).toFixed(2)}`}</p>
                 </>
               ) : (
                 <p className="without-promo">{`Total: $${
@@ -230,7 +209,12 @@ export function CartPage() {
                   </button>
                 </div>
               )}
-              <button className="confirm-btn" onClick={() => onOpenModal()}>
+              <button
+                className="confirm-btn"
+                onClick={() => {
+                  if (!modal) onOpenModal()
+                }}
+              >
                 Confirm order
               </button>
             </div>
