@@ -10,6 +10,7 @@ export function ProductPage() {
   const { id } = useParams()
   const [product, setProduct] = useState<IProduct>()
   const [image, setImage] = useState('')
+  const [uniqueImages, setUniqueImages] = useState([''])
   const { onAddToCart } = React.useContext(AppContext)
   const navigate = useNavigate()
 
@@ -28,6 +29,32 @@ export function ProductPage() {
   useEffect(() => {
     fetchProduct()
   }, [])
+
+  useEffect(() => {
+    const options = {
+      method: 'HEAD',
+    }
+
+    product?.images &&
+      Promise.all(product.images.map((item) => fetch(item, options)))
+        .then((responses) => {
+          const duplicates: { link: string; size: string | null }[] = []
+          for (const response of responses) {
+            duplicates.push({
+              link: response.url,
+              size: response.headers.get('content-length'),
+            })
+          }
+          const unique = duplicates.filter(
+            (item, index) =>
+              duplicates.findIndex((obj) => obj.size === item.size) === index
+          )
+          const uniqueArray: string[] = []
+          unique.map((item) => uniqueArray.push(item.link))
+          setUniqueImages(uniqueArray)
+        })
+        .catch((err) => console.error(err))
+  }, [product?.images])
 
   return (
     <main className="main">
@@ -79,7 +106,7 @@ export function ProductPage() {
                 </div>
                 <div className={styles.images}>
                   <div className={styles.small__images}>
-                    {product.images?.map((image) => (
+                    {uniqueImages?.map((image) => (
                       <img
                         src={image}
                         key={image}
