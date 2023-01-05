@@ -97,6 +97,11 @@ svg {
   transition: all 0.4s ease;
 }
 
+h1,
+h2 {
+  text-align: center;
+}
+
 .main {
   padding-top: 122px;
 }
@@ -748,6 +753,7 @@ input:focus:invalid {
 }
 
 @media (max-width: 650px) {
+
   .creditCardForm .owner,
   .creditCardForm .CVV,
   .creditCardForm #expiration-date,
