@@ -84,11 +84,19 @@ export function CartPage() {
   }
 
   function increaseProductsPerPage() {
-    setProductsPage(productsPerPage + 1)
+    if (cart && productsPerPage < cart?.length) {
+      setProductsPage(productsPerPage + 1)
+    } else {
+      return
+    }
   }
 
   function decreaseProductsPerPage() {
-    setProductsPage(productsPerPage - 1)
+    if (productsPerPage > 1) {
+      setProductsPage(productsPerPage - 1)
+    } else {
+      return
+    }
   }
 
   return (
