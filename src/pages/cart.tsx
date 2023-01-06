@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { CartPagination } from '../components/CartPagination/CartPagination'
 import styles from './cart.module.scss'
 
@@ -71,30 +71,41 @@ export function CartPage() {
   function onDenyPromo2() {
     setIsApplyPromo2(false)
   }
+  const [search, setSearch] = useSearchParams()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [productsPerPage, setProductsPage] = useState(3)
-  // const [currentProducts, setCurrentProducts] = useState()
+  const queryPaginationPage = search.get('Page') || '1'
+  const queryItemsPerPage = search.get('Items') || '3'
 
-  const lastProductIndex = currentPage * productsPerPage
-  const firstProductIndex = lastProductIndex - productsPerPage
+  const [paginationPage, setPaginationPage] = useState(queryPaginationPage)
+  const [itemsPerPage, setItemsPerPage] = useState(queryItemsPerPage)
+
+  const lastProductIndex = parseInt(paginationPage) * parseInt(itemsPerPage)
+  const firstProductIndex = lastProductIndex - parseInt(itemsPerPage)
   const currentProducts = cart?.slice(firstProductIndex, lastProductIndex)
 
   function paginate(pageNumber: number) {
-    setCurrentPage(pageNumber)
+    if (pageNumber === 0) return
+    const page = pageNumber
+    search.set(`Page`, `${page}`)
+    setSearch(search)
+    setPaginationPage(page.toString())
   }
 
   function increaseProductsPerPage() {
-    if (cart && productsPerPage < cart?.length) {
-      setProductsPage(productsPerPage + 1)
+    if (cart && parseInt(itemsPerPage) < cart?.length) {
+      setItemsPerPage((parseInt(itemsPerPage) + 1).toString())
+      search.set(`Items`, `${parseInt(itemsPerPage) + 1}`)
+      setSearch(search)
     } else {
       return
     }
   }
 
   function decreaseProductsPerPage() {
-    if (productsPerPage > 1) {
-      setProductsPage(productsPerPage - 1)
+    if (parseInt(itemsPerPage) > 1) {
+      setItemsPerPage((parseInt(itemsPerPage) - 1).toString())
+      search.set(`Items`, `${parseInt(itemsPerPage) - 1}`)
+      setSearch(search)
     } else {
       return
     }
@@ -106,19 +117,15 @@ export function CartPage() {
       <section className="section">
         <div className="cart container">
           <div className="cart__container">
-            {/* {cart &&
-              cart.map((item, index) => (
-                <p key={index}>{currentPage * productsPerPage - index}</p>
-              ))} */}
             <h2 className="catalog__title section-title">{sectionTitle}</h2>
             <ul className="card__list">
               {cart &&
                 currentProducts?.map((item, index) => (
                   <div className={styles.card__container} key={item.id}>
                     <p>
-                      {currentPage * productsPerPage +
+                      {parseInt(paginationPage) * parseInt(itemsPerPage) +
                         index -
-                        productsPerPage +
+                        parseInt(itemsPerPage) +
                         1}
                     </p>
                     <li className="card__item" key={item.id}>
@@ -149,14 +156,14 @@ export function CartPage() {
                 ))}
             </ul>
             {isCartNotEmpty && (
-              <>
+              <div className={styles.navigation__buttons}>
                 <button onClick={decreaseProductsPerPage}>{'<'}</button>
-                <p>{productsPerPage}</p>
+                <p>{itemsPerPage}</p>
                 <button onClick={increaseProductsPerPage}>{'>'}</button>
-              </>
+              </div>
             )}
             <CartPagination
-              productsPerPage={productsPerPage}
+              productsPerPage={parseInt(itemsPerPage)}
               totalProductsInCart={cart?.length}
               currentProducts={currentProducts}
               paginate={paginate}

@@ -26,6 +26,7 @@ export function CartPagination({
       pageNumbers.push(i)
     }
   }
+
   useEffect(() => {
     if (currentProducts?.length === 0) {
       paginate(pageNumbers.length)
@@ -36,10 +37,12 @@ export function CartPagination({
     <div>
       <ul className={styles.page__numbers}>
         {pageNumbers.map((number) => (
-          <li key={number} className={styles.page__number}>
-            <a href="#" onClick={() => paginate(number)}>
-              {number}
-            </a>
+          <li
+            key={number}
+            className={styles.page__number}
+            onClick={() => paginate(number)}
+          >
+            <span>{number}</span>
           </li>
         ))}
       </ul>
