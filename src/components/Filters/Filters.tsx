@@ -1,5 +1,5 @@
 import styles from './Filters.module.scss'
-import { useProducts } from '../../hooks/products'
+//import { useProducts } from '../../hooks/products'
 import { SelectCategory } from '../Select/SelectCategory'
 import { SelectBrand } from '../Select/SelectBrand'
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider'
@@ -7,7 +7,7 @@ import { useContext, useState } from 'react'
 import AppContext from '../../context'
 
 export function Filters() {
-  const { minPrice, maxPrice } = useProducts()
+  //  const { maxPrice } = useProducts()
   const { onClearFilters } = useContext(AppContext)
   const [copied, setCopied] = useState(false)
 
@@ -35,14 +35,16 @@ export function Filters() {
       <SelectBrand />
       <MultiRangeSlider
         fieldsetName="Rating"
-        min={3}
-        max={10}
+        aria-label="Rating"
+        min={0}
+        max={5}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
       <MultiRangeSlider
         fieldsetName="Price"
-        min={minPrice}
-        max={maxPrice}
+        aria-label="Price"
+        min={0}
+        max={5000}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
     </section>
