@@ -36,7 +36,7 @@ export interface IContext {
   setCartPrice?: Dispatch<number>
   setCart?: Dispatch<IProductInCart[]>
   onAddToCart?: (arg0: IProduct) => void
-  onRemoveFromCart?: (arg0: IProductInCart) => Promise<void>
+  onRemoveFromCart?: (arg0: IProductInCart) => void
   onAddOne?: (arg0: IProductInCart) => void
   onRemoveOne?: (arg0: IProductInCart) => void
   brandSelect?: string

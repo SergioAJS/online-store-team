@@ -10,7 +10,6 @@ import { IProduct, IProductInCart } from './models'
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
 
 export function App() {
-  const [items, setItems] = React.useState<IProduct[]>([])
   const [itemsInCart, setItemsInCart] = React.useState<number>(
     localStorage.itemsInCart !== undefined
       ? JSON.parse(localStorage.itemsInCart)
@@ -25,7 +24,7 @@ export function App() {
     localStorage.cart !== undefined ? JSON.parse(localStorage.cart) : []
   )
 
-  const onAddToCart = async (obj: IProduct) => {
+  const onAddToCart = (obj: IProduct): void => {
     let findItem: IProduct | undefined = undefined
     try {
       if (cart.length > 0) {
@@ -57,7 +56,7 @@ export function App() {
     }
   }
 
-  const onRemoveFromCart = async (obj: IProductInCart) => {
+  const onRemoveFromCart = (obj: IProductInCart): void => {
     let findIndex = -1
     try {
       if (cart.length > 0) {
@@ -188,11 +187,9 @@ export function App() {
     <div className="site-container">
       <AppContext.Provider
         value={{
-          items,
           itemsInCart,
           cartPrice,
           cart,
-          setItems,
           setItemsInCart,
           setCartPrice,
           setCart,
