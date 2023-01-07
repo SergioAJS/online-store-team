@@ -5,7 +5,8 @@ import AppContext from '../../context'
 
 export function SelectBrand() {
   const { brands } = useProducts()
-  const uniqueBrands = Array.from(new Set(brands)).sort()
+  const brandsSet = Array.from(new Set(brands)).sort()
+  const uniqueBrands = brandsSet.filter((item) => item !== 'APPle')
 
   const { brandSelect, onSelect } = useContext(AppContext)
 
