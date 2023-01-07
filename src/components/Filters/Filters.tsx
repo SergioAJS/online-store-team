@@ -35,14 +35,12 @@ export function Filters() {
       <SelectBrand />
       <MultiRangeSlider
         fieldsetName="Rating"
-        aria-label="Rating"
         min={0}
         max={5}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
       />
       <MultiRangeSlider
         fieldsetName="Price"
-        aria-label="Price"
         min={0}
         max={5000}
         onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
