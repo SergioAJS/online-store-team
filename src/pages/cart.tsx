@@ -2,7 +2,9 @@ import React, { ChangeEvent, useState } from 'react'
 import { ProductInCart } from '../components/Product/ProductInCart'
 import AppContext from '../context'
 import { Modal } from '../components/Modal/Modal'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
+import { CartPagination } from '../components/CartPagination/CartPagination'
+import styles from './cart.module.scss'
 
 export function CartPage() {
   const {
@@ -69,6 +71,45 @@ export function CartPage() {
   function onDenyPromo2() {
     setIsApplyPromo2(false)
   }
+  const [search, setSearch] = useSearchParams()
+
+  const queryPaginationPage = search.get('Page') || '1'
+  const queryItemsPerPage = search.get('Items') || '3'
+
+  const [paginationPage, setPaginationPage] = useState(queryPaginationPage)
+  const [itemsPerPage, setItemsPerPage] = useState(queryItemsPerPage)
+
+  const lastProductIndex = parseInt(paginationPage) * parseInt(itemsPerPage)
+  const firstProductIndex = lastProductIndex - parseInt(itemsPerPage)
+  const currentProducts = cart?.slice(firstProductIndex, lastProductIndex)
+
+  function paginate(pageNumber: number) {
+    if (pageNumber === 0) return
+    const page = pageNumber
+    search.set(`Page`, `${page}`)
+    setSearch(search)
+    setPaginationPage(page.toString())
+  }
+
+  function increaseProductsPerPage() {
+    if (cart && parseInt(itemsPerPage) < cart?.length) {
+      setItemsPerPage((parseInt(itemsPerPage) + 1).toString())
+      search.set(`Items`, `${parseInt(itemsPerPage) + 1}`)
+      setSearch(search)
+    } else {
+      return
+    }
+  }
+
+  function decreaseProductsPerPage() {
+    if (parseInt(itemsPerPage) > 1) {
+      setItemsPerPage((parseInt(itemsPerPage) - 1).toString())
+      search.set(`Items`, `${parseInt(itemsPerPage) - 1}`)
+      setSearch(search)
+    } else {
+      return
+    }
+  }
 
   return (
     <main className="main">
@@ -77,35 +118,59 @@ export function CartPage() {
         <div className="cart container">
           <div className="cart__container">
             <h2 className="catalog__title section-title">{sectionTitle}</h2>
-            <ol className="card__list">
+            <div className={styles.navigation__pagination}>
+              {isCartNotEmpty && (
+                <div className={styles.navigation__buttons}>
+                  <h3>Show per page</h3>
+                  <button onClick={decreaseProductsPerPage}>&#x25BC;</button>
+                  <p className={styles.navigation__number}>{itemsPerPage}</p>
+                  <button onClick={increaseProductsPerPage}>&#x25B2;</button>
+                </div>
+              )}
+              <CartPagination
+                productsPerPage={parseInt(itemsPerPage)}
+                totalProductsInCart={cart?.length}
+                currentProducts={currentProducts}
+                paginate={paginate}
+              />
+            </div>
+            <ul className="card__list">
               {cart &&
-                cart.map((item) => (
-                  <li className="card__item" key={item.id}>
-                    <ProductInCart product={item} key={item.id} />
-                    <button
-                      className="card__buttons btn-gray"
-                      onClick={() => onAddOne?.(item)}
-                    >
-                      +
-                    </button>
-                    <span className="card__quantity">{item.inCart}</span>
-                    <button
-                      className="card__buttons btn-gray"
-                      onClick={() => onRemoveOne?.(item)}
-                    >
-                      -
-                    </button>
-                    <button
-                      className="btn card__button delete-btn delete-btn-visible"
-                      data-index={item.id}
-                      title="Remove from cart"
-                      onClick={() => onRemoveFromCart?.(item)}
-                    >
-                      X
-                    </button>
+                currentProducts?.map((item, index) => (
+                  <li className={styles.card__container} key={item.id}>
+                    <p className={styles.card__number}>
+                      {parseInt(paginationPage) * parseInt(itemsPerPage) +
+                        index -
+                        parseInt(itemsPerPage) +
+                        1}
+                    </p>
+                    <div className="card__item" key={item.id}>
+                      <ProductInCart product={item} />
+                      <button
+                        className="card__buttons btn-gray"
+                        onClick={() => onAddOne?.(item)}
+                      >
+                        +
+                      </button>
+                      <span className="card__quantity">{item.inCart}</span>
+                      <button
+                        className="card__buttons btn-gray"
+                        onClick={() => onRemoveOne?.(item)}
+                      >
+                        -
+                      </button>
+                      <button
+                        className="btn card__button delete-btn delete-btn-visible"
+                        data-index={item.id}
+                        title="Remove from cart"
+                        onClick={() => onRemoveFromCart?.(item)}
+                      >
+                        X
+                      </button>
+                    </div>
                   </li>
                 ))}
-            </ol>
+            </ul>
           </div>
           {isCartNotEmpty && (
             <div className="summary">
