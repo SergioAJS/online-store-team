@@ -17,6 +17,10 @@ export function Catalogue() {
     onSelect,
     sortSelect,
     viewSelect,
+    minPriceCont,
+    maxPriceCont,
+    minRateCont,
+    maxRateCont,
   } = useContext(AppContext)
 
   const filteredProducts = products.filter(
@@ -24,6 +28,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -33,6 +43,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -42,6 +58,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -51,6 +73,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -60,6 +88,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -69,6 +103,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -78,6 +118,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&
@@ -87,6 +133,12 @@ export function Catalogue() {
       (product.category
         .toLowerCase()
         .includes((categorySelect || '').toLowerCase()) &&
+        product.price.toString() >= (parseInt(minPriceCont as string) || '') &&
+        product.price.toString() <= (parseInt(maxPriceCont as string) || '') &&
+        product.rating.toString() >=
+          (parseFloat(minRateCont as string) || '') &&
+        product.rating.toString() <=
+          (parseFloat(maxRateCont as string) || '') &&
         product.brand
           .toLowerCase()
           .includes((brandSelect || '').toLowerCase()) &&

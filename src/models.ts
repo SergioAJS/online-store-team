@@ -49,6 +49,14 @@ export interface IContext {
   viewSelect?: string
   modal?: boolean
   setModal?: Dispatch<boolean>
+  onMinPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minPriceCont?: string
+  maxPriceCont?: string
+  onMinRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minRateCont?: string
+  maxRateCont?: string
 }
 
 export enum Cards {

@@ -8,6 +8,9 @@ export function useProducts() {
   const [categories, setCategories] = useState<IProduct['category'][]>([])
   const [minPrice, setMinPrice] = useState<IProduct['price']>(0)
   const [maxPrice, setMaxPrice] = useState<IProduct['price']>(0)
+  const [minRate, setMinRate] = useState<IProduct['rating']>(0)
+  const [maxRate, setMaxRate] = useState<IProduct['rating']>(0)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -25,10 +28,17 @@ export function useProducts() {
       setCategories(response.data.products.map((item) => item.category))
 
       const priceArr = response.data.products.map((item) => item.price)
+      const rateArr = response.data.products.map((item) => item.rating)
+
       const minPrice = Math.min(...priceArr)
       setMinPrice(minPrice)
       const maxPrice = Math.max(...priceArr)
       setMaxPrice(maxPrice)
+
+      const minRate = Math.min(...rateArr)
+      setMinRate(minRate)
+      const maxRate = Math.max(...rateArr)
+      setMaxRate(maxRate)
 
       setLoading(false)
     } catch (e: unknown) {
@@ -42,5 +52,15 @@ export function useProducts() {
     fetchProducts()
   }, [])
 
-  return { products, error, loading, brands, categories, minPrice, maxPrice }
+  return {
+    products,
+    error,
+    loading,
+    brands,
+    categories,
+    minPrice,
+    maxPrice,
+    minRate,
+    maxRate,
+  }
 }
