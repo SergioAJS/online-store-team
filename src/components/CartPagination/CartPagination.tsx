@@ -34,18 +34,16 @@ export function CartPagination({
   }, [currentProducts?.length, pageNumbers.length, paginate])
 
   return (
-    <div>
-      <ul className={styles.page__numbers}>
-        {pageNumbers.map((number) => (
-          <li
-            key={number}
-            className={styles.page__number}
-            onClick={() => paginate(number)}
-          >
-            <span>{number}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={styles.page__numbers}>
+      {pageNumbers.map((number) => (
+        <li
+          key={number}
+          className={styles.page__number}
+          onClick={() => paginate(number)}
+        >
+          <span>{number}</span>
+        </li>
+      ))}
+    </ul>
   )
 }

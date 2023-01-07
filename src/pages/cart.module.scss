@@ -1,11 +1,28 @@
 .card__container {
   display: flex;
   align-items: center;
-  gap:  20px;
+  gap: 20px;
+  width: 90%;
+  max-width: 700px;
+}
+
+.navigation__pagination {
+  display: flex;
+  margin-bottom: 30px;
 }
 
 .navigation__buttons {
   display: flex;
   gap: 15px;
   margin: 10px;
+}
+
+.navigation__number {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card__number {
+  margin-right: 5px;
+  width: 10px;
 }

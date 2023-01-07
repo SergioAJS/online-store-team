@@ -118,17 +118,33 @@ export function CartPage() {
         <div className="cart container">
           <div className="cart__container">
             <h2 className="catalog__title section-title">{sectionTitle}</h2>
+            <div className={styles.navigation__pagination}>
+              {isCartNotEmpty && (
+                <div className={styles.navigation__buttons}>
+                  <h3>Show per page</h3>
+                  <button onClick={decreaseProductsPerPage}>&#x25BC;</button>
+                  <p className={styles.navigation__number}>{itemsPerPage}</p>
+                  <button onClick={increaseProductsPerPage}>&#x25B2;</button>
+                </div>
+              )}
+              <CartPagination
+                productsPerPage={parseInt(itemsPerPage)}
+                totalProductsInCart={cart?.length}
+                currentProducts={currentProducts}
+                paginate={paginate}
+              />
+            </div>
             <ul className="card__list">
               {cart &&
                 currentProducts?.map((item, index) => (
-                  <div className={styles.card__container} key={item.id}>
-                    <p>
+                  <li className={styles.card__container} key={item.id}>
+                    <p className={styles.card__number}>
                       {parseInt(paginationPage) * parseInt(itemsPerPage) +
                         index -
                         parseInt(itemsPerPage) +
                         1}
                     </p>
-                    <li className="card__item" key={item.id}>
+                    <div className="card__item" key={item.id}>
                       <ProductInCart product={item} />
                       <button
                         className="card__buttons btn-gray"
@@ -151,23 +167,10 @@ export function CartPage() {
                       >
                         X
                       </button>
-                    </li>
-                  </div>
+                    </div>
+                  </li>
                 ))}
             </ul>
-            {isCartNotEmpty && (
-              <div className={styles.navigation__buttons}>
-                <button onClick={decreaseProductsPerPage}>{'<'}</button>
-                <p>{itemsPerPage}</p>
-                <button onClick={increaseProductsPerPage}>{'>'}</button>
-              </div>
-            )}
-            <CartPagination
-              productsPerPage={parseInt(itemsPerPage)}
-              totalProductsInCart={cart?.length}
-              currentProducts={currentProducts}
-              paginate={paginate}
-            />
           </div>
           {isCartNotEmpty && (
             <div className="summary">
