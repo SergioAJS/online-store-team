@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import AppContext from '../../context'
 
 export function SelectCategory() {
-  const { categories } = useProducts()
+  const { categories, products } = useProducts()
   const uniqueCategories = Array.from(new Set(categories)).sort()
 
   const { categorySelect, onSelect } = useContext(AppContext)
@@ -12,7 +12,14 @@ export function SelectCategory() {
   function Category(item: string, index: number) {
     return (
       <option className={styles.slc__select} value={item} key={index}>
-        {item}
+        <>
+          {
+            products.filter((product) =>
+              product.category.toLowerCase().includes(item.toLowerCase())
+            ).length
+          }
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;{item}</p>
+        </>
       </option>
     )
   }
