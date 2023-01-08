@@ -27,11 +27,9 @@ export interface IProductInCart extends IProduct {
 }
 
 export interface IContext {
-  items?: IProduct[]
   itemsInCart?: number
   cartPrice?: number
   cart?: IProductInCart[]
-  setItems?: Dispatch<IProduct[]>
   setItemsInCart?: Dispatch<number>
   setCartPrice?: Dispatch<number>
   setCart?: Dispatch<IProductInCart[]>

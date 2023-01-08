@@ -8,7 +8,6 @@ import { ProductPage } from './pages/ProductPage'
 import AppContext from './context'
 import { IProduct, IProductInCart } from './models'
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
-// import { useProducts } from './hooks/products'
 
 export function App() {
   const [itemsInCart, setItemsInCart] = React.useState<number>(
