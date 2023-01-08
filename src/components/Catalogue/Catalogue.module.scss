@@ -9,21 +9,25 @@
     margin-bottom: 20px;
 
     .sort {
-      background-color: rgb(245, 245, 245);
-      padding: 3px 10px;
-      border-radius: 7px;
-      outline: none;
-      transition: 0.5s;
       cursor: pointer;
     }
 
+    .search {
+      border: 1px solid;
+    }
+
+    .sort,
     .search {
       background-color: rgb(245, 245, 245);
       padding: 3px 10px;
       border-radius: 7px;
       outline: none;
-      transition: 0.5s;
-      border: 1px solid;
+      transition: all 0.4s ease-out;
+
+      &:hover,
+      &:focus {
+        background-color: #9fe5e1;
+      }
     }
   }
 

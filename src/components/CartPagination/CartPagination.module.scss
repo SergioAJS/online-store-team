@@ -8,5 +8,15 @@
     padding: 5px;
     border: 1px solid blue;
     cursor: pointer;
+    transition: all .4s ease-out;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-hover);
+    }
+
+    &:active {
+      background-color: var(--color-active);
+    }
   }
 }

@@ -7,4 +7,9 @@
     outline: none;
     transition: 0.5s;
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: #9fe5e1;
+    }
 }

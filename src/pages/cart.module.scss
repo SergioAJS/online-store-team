@@ -17,6 +17,20 @@
   margin: 10px;
 }
 
+.navigation__buttons_down,
+.navigation__buttons_up {
+  transition: all .4s ease-out;
+
+  &:hover,
+  &:focus {
+    color: var(--color-hover);
+  }
+
+  &:active {
+    color: var(--color-active);
+  }
+}
+
 .navigation__number {
   font-size: 20px;
   font-weight: 600;

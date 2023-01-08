@@ -122,9 +122,19 @@ export function CartPage() {
               {isCartNotEmpty && (
                 <div className={styles.navigation__buttons}>
                   <h3>Show per page</h3>
-                  <button onClick={decreaseProductsPerPage}>&#x25BC;</button>
+                  <button
+                    className={styles.navigation__buttons_up}
+                    onClick={decreaseProductsPerPage}
+                  >
+                    &#x25BC;
+                  </button>
                   <p className={styles.navigation__number}>{itemsPerPage}</p>
-                  <button onClick={increaseProductsPerPage}>&#x25B2;</button>
+                  <button
+                    className={styles.navigation__buttons_down}
+                    onClick={increaseProductsPerPage}
+                  >
+                    &#x25B2;
+                  </button>
                 </div>
               )}
               <CartPagination

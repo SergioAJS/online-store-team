@@ -38,6 +38,7 @@ export function CartPagination({
       {pageNumbers.map((number) => (
         <li
           key={number}
+          tabIndex={3}
           className={styles.page__number}
           onClick={() => paginate(number)}
         >
