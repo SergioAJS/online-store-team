@@ -64,7 +64,7 @@ picture {
   height: auto;
   max-height: 100%;
   object-fit: cover;
-  transition: all .4s ease-out;
+  transition: all 0.4s ease-out;
 }
 
 a {
@@ -106,6 +106,8 @@ h2 {
 .site-container {
   position: relative;
   overflow: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .container {
@@ -691,7 +693,6 @@ input:focus:invalid {
 }
 
 @media (max-width: 650px) {
-
   .creditCardForm .owner,
   .creditCardForm .CVV,
   .creditCardForm #expiration-date,
