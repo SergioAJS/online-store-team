@@ -159,7 +159,7 @@ export function App() {
   const [modal, setModal] = useState<boolean>(false)
 
   function onMinPrice(e: ChangeEvent<HTMLInputElement>) {
-    const min = Math.min(+e.target.value, 1749 - 1).toString()
+    const min = Math.min(+e.target.value, +maxPriceCont - 1).toString()
     min
       ? search.set(`${e.target.ariaLabel}`, `${min}`)
       : search.delete(`${e.target.ariaLabel}`)
@@ -168,7 +168,7 @@ export function App() {
   }
 
   function onMaxPrice(e: ChangeEvent<HTMLInputElement>) {
-    const max = Math.max(+e.target.value, 12 + 1).toString()
+    const max = Math.max(+e.target.value, +minPriceCont + 1).toString()
     max
       ? search.set(`${e.target.ariaLabel}`, `${max}`)
       : search.delete(`${e.target.ariaLabel}`)
@@ -177,7 +177,7 @@ export function App() {
   }
 
   function onMinRate(e: ChangeEvent<HTMLInputElement>) {
-    const min = Math.min(+e.target.value, 4.83 - 0.01).toString()
+    const min = Math.min(+e.target.value, +maxRateCont - 0.01).toString()
     min
       ? search.set(`${e.target.ariaLabel}`, `${min}`)
       : search.delete(`${e.target.ariaLabel}`)
@@ -186,7 +186,7 @@ export function App() {
   }
 
   function onMaxRate(e: ChangeEvent<HTMLInputElement>) {
-    const max = Math.max(+e.target.value, 4 + 0.01).toString()
+    const max = Math.max(+e.target.value, +minRateCont + 0.01).toString()
     max
       ? search.set(`${e.target.ariaLabel}`, `${max}`)
       : search.delete(`${e.target.ariaLabel}`)
