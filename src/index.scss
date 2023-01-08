@@ -18,15 +18,9 @@ html {
 :root {
   --color-white: #fff;
   --color-black: #000;
-  --color-7: #777;
-  --color-7a: #7a7a7a;
   --color-active: #4b9200;
-  --color-orange: #f9804b;
   --color-back: #efeee8;
-  --color-rad: #d31414;
-  --color-gray: #767474;
-  --color-gray-smoky: #ababab;
-  --color-gray-light: #f1f3f2;
+  --color-7a: #7a7a7a;
   --color-hover: #e47209;
 }
 
@@ -409,7 +403,7 @@ section {
       border: 1px solid var(--color-7a);
       padding: 5px 10px 5px 10px;
       border-radius: 7px;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
 
       &:hover {
         color: var(--color-hover);
