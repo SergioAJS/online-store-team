@@ -64,7 +64,8 @@
         width: 80px;
         cursor: pointer;
 
-        & img:hover {
+        & img:hover,
+        & img:focus {
           scale: 4;
         }
       }

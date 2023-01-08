@@ -32,6 +32,7 @@
 
       .characteristic {
         margin-bottom: 5px;
+
         span {
           font-size: 1.1em;
         }
@@ -65,7 +66,8 @@
       width: 30%;
       transition: all 0.3s ease;
 
-      &:hover {
+      &:hover,
+      &:focus {
         color: var(--color-hover);
       }
 

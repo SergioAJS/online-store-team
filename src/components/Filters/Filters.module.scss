@@ -4,8 +4,8 @@
 }
 
 .buttons {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 
   button {
     text-align: center;
@@ -17,6 +17,10 @@
     margin-bottom: 18px;
 
     &:hover {
+      color: var(--color-hover);
+    }
+
+    &:focus {
       color: var(--color-hover);
     }
 

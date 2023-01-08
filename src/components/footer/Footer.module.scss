@@ -26,6 +26,14 @@
       }
     }
 
+    &:focus {
+      color: var(--color-hover);
+
+      .githubLogo {
+        opacity: 1;
+      }
+    }
+
     &:active {
       color: var(--color-active);
     }
@@ -58,6 +66,12 @@
       color: var(--color-hover);
       opacity: 1;
     }
+
+    &:focus {
+      color: var(--color-hover);
+      opacity: 1;
+    }
+
     &:active {
       color: var(--color-active);
     }

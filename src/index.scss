@@ -68,7 +68,7 @@ picture {
   height: auto;
   max-height: 100%;
   object-fit: cover;
-  transition: all .4 ease-out;
+  transition: all .4s ease-out;
 }
 
 a {
@@ -189,10 +189,6 @@ section {
   transition: all 0.4s ease;
 }
 
-.card__picture:hover {
-  cursor: grab;
-}
-
 .card__content {
   position: relative;
   display: flex;
@@ -276,7 +272,8 @@ section {
   text-align: center;
 }
 
-.delete-btn:hover {
+.delete-btn:hover,
+.delete-btn:focus {
   color: var(--color-hover);
 }
 
@@ -415,6 +412,10 @@ section {
       transition: all 0.3s ease;
 
       &:hover {
+        color: var(--color-hover);
+      }
+
+      &:focus {
         color: var(--color-hover);
       }
 
