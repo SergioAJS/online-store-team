@@ -53,10 +53,10 @@
     .product__button {
       text-align: center;
       border: 1px solid var(--color-7a);
-      padding: 3px;
+      padding: 5px 10px 5px 10px;
       border-radius: 7px;
-      width: 30%;
-      transition: all 0.3s ease;
+      width: 35%;
+      transition: all 0.4s ease;
 
       &:hover,
       &:focus {
