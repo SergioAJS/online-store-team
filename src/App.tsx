@@ -8,9 +8,9 @@ import { ProductPage } from './pages/ProductPage'
 import AppContext from './context'
 import { IProduct, IProductInCart } from './models'
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
+// import { useProducts } from './hooks/products'
 
 export function App() {
-  const [items, setItems] = React.useState<IProduct[]>([])
   const [itemsInCart, setItemsInCart] = React.useState<number>(
     localStorage.itemsInCart !== undefined
       ? JSON.parse(localStorage.itemsInCart)
@@ -25,7 +25,7 @@ export function App() {
     localStorage.cart !== undefined ? JSON.parse(localStorage.cart) : []
   )
 
-  const onAddToCart = async (obj: IProduct) => {
+  const onAddToCart = (obj: IProduct): void => {
     let findItem: IProduct | undefined = undefined
     try {
       if (cart.length > 0) {
@@ -57,7 +57,7 @@ export function App() {
     }
   }
 
-  const onRemoveFromCart = async (obj: IProductInCart) => {
+  const onRemoveFromCart = (obj: IProductInCart): void => {
     let findIndex = -1
     try {
       if (cart.length > 0) {
@@ -141,13 +141,58 @@ export function App() {
   const queryProductSearch = search.get('Search') || ''
   const querySort = search.get('Sort') || ''
   const queryView = search.get('View') || ''
+  const queryMinPrice = search.get('minPrice') || '12'
+  const queryMaxPrice = search.get('maxPrice') || '1749'
+  const queryMinRate = search.get('minRate') || '4'
+  const queryMaxRate = search.get('maxRate') || '4.83'
 
   const [brandSelect, setBrandSelect] = useState(queryBrand)
   const [categorySelect, setCategorySelect] = useState(queryCategory)
   const [productSearch, setProductSearch] = useState(queryProductSearch)
   const [sortSelect, setSortSelect] = useState(querySort)
   const [viewSelect, setViewSelect] = useState(queryView)
+  const [minPriceCont, setMinPrice] = useState(queryMinPrice)
+  const [maxPriceCont, setMaxPrice] = useState(queryMaxPrice)
+  const [minRateCont, setMinRate] = useState(queryMinRate)
+  const [maxRateCont, setMaxRate] = useState(queryMaxRate)
+
   const [modal, setModal] = useState<boolean>(false)
+
+  function onMinPrice(e: ChangeEvent<HTMLInputElement>) {
+    const min = Math.min(+e.target.value, +maxPriceCont - 1).toString()
+    min
+      ? search.set(`${e.target.ariaLabel}`, `${min}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    setMinPrice(min)
+  }
+
+  function onMaxPrice(e: ChangeEvent<HTMLInputElement>) {
+    const max = Math.max(+e.target.value, +minPriceCont + 1).toString()
+    max
+      ? search.set(`${e.target.ariaLabel}`, `${max}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    setMaxPrice(max)
+  }
+
+  function onMinRate(e: ChangeEvent<HTMLInputElement>) {
+    const min = Math.min(+e.target.value, +maxRateCont - 0.01).toString()
+    min
+      ? search.set(`${e.target.ariaLabel}`, `${min}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    setMinRate(min)
+  }
+
+  function onMaxRate(e: ChangeEvent<HTMLInputElement>) {
+    const max = Math.max(+e.target.value, +minRateCont + 0.01).toString()
+    max
+      ? search.set(`${e.target.ariaLabel}`, `${max}`)
+      : search.delete(`${e.target.ariaLabel}`)
+    setSearch(search)
+    setMaxRate(max)
+  }
 
   function onSelect(e: ChangeEvent<HTMLSelectElement>) {
     const select = e.target.value
@@ -182,17 +227,19 @@ export function App() {
     setSortSelect('')
     setProductSearch('')
     setSearch([])
+    setMinPrice('12')
+    setMaxPrice('1749')
+    setMinRate('4')
+    setMaxRate('4.83')
   }
 
   return (
     <div className="site-container">
       <AppContext.Provider
         value={{
-          items,
           itemsInCart,
           cartPrice,
           cart,
-          setItems,
           setItemsInCart,
           setCartPrice,
           setCart,
@@ -210,6 +257,14 @@ export function App() {
           viewSelect,
           modal,
           setModal,
+          onMinPrice,
+          onMaxPrice,
+          minPriceCont,
+          maxPriceCont,
+          onMinRate,
+          onMaxRate,
+          minRateCont,
+          maxRateCont,
         }}
       >
         <div

@@ -11,20 +11,13 @@ const MultiRangeSlider = ({
   fieldsetName: string
   min: number
   max: number
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: any
+  onChange: ({ min, max }: { min: number; max: number }) => void
 }) => {
   const [minVal, setMinVal] = useState(min)
   const [maxVal, setMaxVal] = useState(max)
   const minValRef = useRef(min)
   const maxValRef = useRef(max)
   const range = useRef(null)
-  // console.log(minVal, 'minVal')
-  // console.log(maxVal, 'maxVal')
-  // console.log(min, 'min')
-  // console.log(max, 'max')
-  // console.log(minValRef, 'minValRef')
-  // console.log(maxValRef, 'maxValRef')
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -66,6 +59,7 @@ const MultiRangeSlider = ({
       <h3 className={styles.fieldset_title}>{fieldsetName}</h3>
       <input
         type="range"
+        aria-label={`min${fieldsetName}`}
         min={min}
         max={max}
         value={minVal !== 0 ? minVal : min}
@@ -79,6 +73,7 @@ const MultiRangeSlider = ({
       />
       <input
         type="range"
+        aria-label={`max${fieldsetName}`}
         min={min}
         max={max}
         value={maxVal !== 0 ? maxVal : max}

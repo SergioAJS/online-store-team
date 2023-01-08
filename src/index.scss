@@ -68,6 +68,7 @@ picture {
   height: auto;
   max-height: 100%;
   object-fit: cover;
+  transition: all .4 ease-out;
 }
 
 a {
@@ -757,4 +758,10 @@ input:focus:invalid {
   .creditCardForm #credit_cards {
     text-align: left;
   }
+}
+
+
+.item__brand {
+  padding: 10px;
+  margin: 10px;
 }

@@ -36,7 +36,7 @@ export interface IContext {
   setCartPrice?: Dispatch<number>
   setCart?: Dispatch<IProductInCart[]>
   onAddToCart?: (arg0: IProduct) => void
-  onRemoveFromCart?: (arg0: IProductInCart) => Promise<void>
+  onRemoveFromCart?: (arg0: IProductInCart) => void
   onAddOne?: (arg0: IProductInCart) => void
   onRemoveOne?: (arg0: IProductInCart) => void
   brandSelect?: string
@@ -49,6 +49,14 @@ export interface IContext {
   viewSelect?: string
   modal?: boolean
   setModal?: Dispatch<boolean>
+  onMinPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minPriceCont?: string
+  maxPriceCont?: string
+  onMinRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minRateCont?: string
+  maxRateCont?: string
 }
 
 export enum Cards {
