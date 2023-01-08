@@ -753,7 +753,6 @@ input:focus:invalid {
 }
 
 @media (max-width: 650px) {
-
   .creditCardForm .owner,
   .creditCardForm .CVV,
   .creditCardForm #expiration-date,
@@ -764,4 +763,10 @@ input:focus:invalid {
   .creditCardForm #credit_cards {
     text-align: left;
   }
+}
+
+
+.item__brand {
+  padding: 10px;
+  margin: 10px;
 }

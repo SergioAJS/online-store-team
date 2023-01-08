@@ -4,15 +4,23 @@ import { useContext } from 'react'
 import AppContext from '../../context'
 
 export function SelectBrand() {
-  const { brands } = useProducts()
-  const uniqueBrands = Array.from(new Set(brands)).sort()
+  const { brands, products } = useProducts()
+  const brandsSet = Array.from(new Set(brands)).sort()
+  const uniqueBrands = brandsSet.filter((item) => item !== 'APPle')
 
   const { brandSelect, onSelect } = useContext(AppContext)
 
   function Brand(item: string, index: number) {
     return (
       <option className={styles.slc__select} value={item} key={index}>
-        {item}
+        <>
+          {
+            products.filter((product) =>
+              product.brand.toLowerCase().includes(item.toLowerCase())
+            ).length
+          }
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item}</p>
+        </>
       </option>
     )
   }
