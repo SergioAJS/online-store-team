@@ -90,10 +90,10 @@ export function PriceRange() {
         <div className={styles.slider__range} />
         <div ref={range} className={styles.slider__range} />
         <div className={styles.slider__left_value}>
-          {minPriceCont ? minPriceCont : minVal}
+          ${minPriceCont ? minPriceCont : minVal}.00
         </div>
         <div className={styles.slider__right_value}>
-          {maxPriceCont ? maxPriceCont : maxVal}
+          ${maxPriceCont ? maxPriceCont : maxVal}.00
         </div>
       </div>
     </div>

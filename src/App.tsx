@@ -10,6 +10,10 @@ import { IProduct, IProductInCart } from './models'
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
 
 export function App() {
+  console.log(
+    'Оценка проекта.\n Не выполнен пункт ТЗ:\nпри применении любого фильтра, должны динамически пересчитываться все фильтры и меняться состояние элементов в них. (-10 баллов)\n Общая оценка: 290 баллов'
+  )
+
   const [itemsInCart, setItemsInCart] = React.useState<number>(
     localStorage.itemsInCart !== undefined
       ? JSON.parse(localStorage.itemsInCart)

@@ -18,7 +18,7 @@ export function SelectCategory() {
               product.category.toLowerCase().includes(item.toLowerCase())
             ).length
           }
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;{item}</p>
+          <>&nbsp;&nbsp;&nbsp;&nbsp;{item}</>
         </>
       </option>
     )

@@ -19,7 +19,7 @@ export function SelectBrand() {
               product.brand.toLowerCase().includes(item.toLowerCase())
             ).length
           }
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item}</p>
+          <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item}</>
         </>
       </option>
     )
