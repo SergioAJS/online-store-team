@@ -1,0 +1,65 @@
+import { ChangeEvent, Dispatch } from 'react'
+
+export interface IResponse {
+  products: Array<IProduct>
+  total: number
+  skip: number
+  limit: number
+}
+
+export interface IProduct {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images?: string[]
+  inCart?: 0
+}
+
+export interface IProductInCart extends IProduct {
+  inCart: 0
+}
+
+export interface IContext {
+  itemsInCart?: number
+  cartPrice?: number
+  cart?: IProductInCart[]
+  setItemsInCart?: Dispatch<number>
+  setCartPrice?: Dispatch<number>
+  setCart?: Dispatch<IProductInCart[]>
+  onAddToCart?: (arg0: IProduct) => void
+  onRemoveFromCart?: (arg0: IProductInCart) => void
+  onAddOne?: (arg0: IProductInCart) => void
+  onRemoveOne?: (arg0: IProductInCart) => void
+  brandSelect?: string
+  categorySelect?: string
+  onSelect?: (arg0: ChangeEvent<HTMLSelectElement>) => void
+  productSearch?: string
+  onSearchProduct?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  sortSelect?: string
+  onClearFilters?: () => void
+  viewSelect?: string
+  modal?: boolean
+  setModal?: Dispatch<boolean>
+  onMinPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxPrice?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minPriceCont?: string
+  maxPriceCont?: string
+  onMinRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  onMaxRate?: (arg0: ChangeEvent<HTMLInputElement>) => void
+  minRateCont?: string
+  maxRateCont?: string
+}
+
+export enum Cards {
+  Visa = '/assets/images/visa.jpg',
+  MasterCard = '/assets/images/mastercard.jpg',
+  AmericanExpress = '/assets/images/amex.jpg',
+  Other = '',
+}

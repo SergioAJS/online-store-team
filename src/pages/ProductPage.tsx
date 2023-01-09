@@ -1,0 +1,150 @@
+import React, { useEffect, useState } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { IProduct } from '../models'
+import axios, { AxiosError } from 'axios'
+import styles from './ProductPage.module.scss'
+import { ToCartBtn } from '../components/Buttons/ToCartBtn'
+import AppContext from '../context'
+
+export function ProductPage() {
+  const { id } = useParams()
+  const [product, setProduct] = useState<IProduct>()
+  const [image, setImage] = useState('')
+  const [uniqueImages, setUniqueImages] = useState([''])
+  const { onAddToCart } = React.useContext(AppContext)
+  const navigate = useNavigate()
+
+  async function fetchProduct() {
+    try {
+      const response = await axios.get<IProduct>(
+        `https://dummyjson.com/products/${id}`
+      )
+      setProduct(response.data)
+    } catch (e: unknown) {
+      const error = e as AxiosError
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchProduct()
+  }, [])
+
+  useEffect(() => {
+    const options = {
+      method: 'HEAD',
+    }
+
+    product?.images &&
+      Promise.all(product.images.map((item) => fetch(item, options)))
+        .then((responses) => {
+          const duplicates: { link: string; size: string | null }[] = []
+          for (const response of responses) {
+            duplicates.push({
+              link: response.url,
+              size: response.headers.get('content-length'),
+            })
+          }
+          const unique = duplicates.filter(
+            (item, index) =>
+              duplicates.findIndex((obj) => obj.size === item.size) === index
+          )
+          const uniqueArray: string[] = []
+          unique.map((item) => uniqueArray.push(item.link))
+          setUniqueImages(uniqueArray)
+        })
+        .catch((err) => console.error(err))
+  }, [product?.images])
+
+  return (
+    <main className="main">
+      {product && product.id > 0 && product.id < 21 ? (
+        <>
+          <h1 className={styles.title}>{product.title}</h1>
+          <div className={`${styles.main__container} container`}>
+            <ul className={styles.bread__crumbs}>
+              <li>
+                <Link to={'/'}>Store</Link>
+              </li>
+              <li>{'>>'}</li>
+              <li>{product.category}</li>
+              <li>{'>>'}</li>
+              <li>{product.brand}</li>
+              <li>{'>>'}</li>
+              <li>{product.title}</li>
+            </ul>
+
+            <section className={`${styles.product__container} container`}>
+              <div className={styles.product}>
+                <div className={styles.description__container}>
+                  <ul className={styles.description}>
+                    <li className={styles.characteristic}>
+                      Category: <span>{product.category}</span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      Brand: <span>{product.brand}</span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      In Stock: <span>{product.stock}</span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      Rating: <span>{product.rating} / 5</span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      Discount: <span>{product.discountPercentage}%</span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      Your Price:{' '}
+                      <span className={styles.price}>
+                        ${product.price.toFixed(2)}
+                      </span>
+                    </li>
+                    <li className={styles.characteristic}>
+                      Description: <span>{product.description}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className={styles.images}>
+                  <div className={styles.small__images}>
+                    {uniqueImages?.map((image) => (
+                      <img
+                        src={image}
+                        key={image}
+                        onClick={() => {
+                          setImage(image)
+                        }}
+                      ></img>
+                    ))}
+                  </div>
+                  <div className={styles.big__image}>
+                    <img
+                      className={styles.product__image}
+                      src={image ? image : product.thumbnail}
+                      alt={product.title}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.buttons}>
+                <ToCartBtn product={product} />
+                <button
+                  className={styles.product__button}
+                  onClick={() => {
+                    onAddToCart?.(product)
+                    navigate('/cart', { state: { modalOuter: true } })
+                  }}
+                >
+                  Buy Now
+                </button>
+              </div>
+            </section>
+          </div>
+        </>
+      ) : (
+        <div className={`${styles.main__container} container`}>
+          <div className={styles.not__found}>Product not Found</div>
+        </div>
+      )}
+    </main>
+  )
+}

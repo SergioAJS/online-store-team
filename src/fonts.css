@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../public/assets/fonts/PlusJakartaSans-Regular.woff2')
+      format('woff2'),
+    url('../public/assets/fonts/PlusJakartaSans-Regular.woff') format('woff');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Prata';
+  src: url('../public/assets/fonts/Prata-Regular.woff2') format('woff2'),
+    url('../public/assets/fonts/Prata-Regular.woff') format('woff');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
